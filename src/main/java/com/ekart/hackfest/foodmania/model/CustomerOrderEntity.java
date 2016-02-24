@@ -3,9 +3,12 @@ package com.ekart.hackfest.foodmania.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * Created by rishabh.sood on 23/02/16.
@@ -39,4 +42,12 @@ public class CustomerOrderEntity {
     @ManyToOne
     @JoinColumn(name = "CUSTOMERID", referencedColumnName = "CUSTOMERID", nullable = false)
     private CustomerEntity customerEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "MERCHANTID", referencedColumnName = "MERCHANTID", nullable = false)
+    private MerchantInfoEntity merchantInfoEntity;
+
+    @OneToMany(mappedBy = "CustomerOrderEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<ItemForOrderEntity> itemForOrderEntities;
 }

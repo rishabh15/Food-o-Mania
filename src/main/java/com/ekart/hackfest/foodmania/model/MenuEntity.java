@@ -1,67 +1,39 @@
 package com.ekart.hackfest.foodmania.model;
 
+import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * Created by rishabh.sood on 23/02/16.
  */
+@Data
 @Entity
 @Table(name = "Menu", schema = "", catalog = "foodmania")
 public class MenuEntity {
-    private String menuid;
-    private Timestamp starttime;
-    private Timestamp endtime;
 
     @Id
     @Column(name = "MENUID")
-    public String getMenuid() {
-        return menuid;
-    }
-
-    public void setMenuid(String menuid) {
-        this.menuid = menuid;
-    }
+    private String menuid;
 
     @Basic
     @Column(name = "STARTTIME")
-    public Timestamp getStarttime() {
-        return starttime;
-    }
-
-    public void setStarttime(Timestamp starttime) {
-        this.starttime = starttime;
-    }
+    private Timestamp starttime;
 
     @Basic
     @Column(name = "ENDTIME")
-    public Timestamp getEndtime() {
-        return endtime;
-    }
+    private Timestamp endtime;
 
-    public void setEndtime(Timestamp endtime) {
-        this.endtime = endtime;
-    }
+    @ManyToOne
+    @JoinColumn(name = "MERCHANTID", referencedColumnName = "MERCHANTID", nullable = false)
+    private MerchantInfoEntity merchantInfoEntity;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    @OneToMany(mappedBy = "MenuEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<ItemEntity> itemEntities;
 
-        MenuEntity that = (MenuEntity) o;
-
-        if (menuid != null ? !menuid.equals(that.menuid) : that.menuid != null) return false;
-        if (starttime != null ? !starttime.equals(that.starttime) : that.starttime != null) return false;
-        if (endtime != null ? !endtime.equals(that.endtime) : that.endtime != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = menuid != null ? menuid.hashCode() : 0;
-        result = 31 * result + (starttime != null ? starttime.hashCode() : 0);
-        result = 31 * result + (endtime != null ? endtime.hashCode() : 0);
-        return result;
-    }
 }
