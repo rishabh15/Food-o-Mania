@@ -34,7 +34,7 @@ public class CustomerEntity {
     @Column(name = "EMAIL")
     private String email;
 
-    @OneToMany(mappedBy = "CustomerEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customerEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     private List<CustomerOrderEntity> customerOrderEntities;
 }

@@ -47,7 +47,7 @@ public class CustomerOrderEntity {
     @JoinColumn(name = "MERCHANTID", referencedColumnName = "MERCHANTID", nullable = false)
     private MerchantInfoEntity merchantInfoEntity;
 
-    @OneToMany(mappedBy = "CustomerOrderEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customerOrderEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     private List<ItemForOrderEntity> itemForOrderEntities;
 }

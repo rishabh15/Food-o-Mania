@@ -31,11 +31,11 @@ public class MerchantInfoEntity {
     @Column(name = "PHONE")
     private String phone;
 
-    @OneToMany(mappedBy = "MerchantInfoEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "merchantInfoEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     private List<MenuEntity> menuEntities;
 
-    @OneToMany(mappedBy = "MerchantInfoEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "merchantInfoEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     private List<CustomerOrderEntity> customerOrderEntities;
 

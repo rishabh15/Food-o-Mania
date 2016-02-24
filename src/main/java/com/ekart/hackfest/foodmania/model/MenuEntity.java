@@ -32,7 +32,7 @@ public class MenuEntity {
     @JoinColumn(name = "MERCHANTID", referencedColumnName = "MERCHANTID", nullable = false)
     private MerchantInfoEntity merchantInfoEntity;
 
-    @OneToMany(mappedBy = "MenuEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "menuEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     private List<ItemEntity> itemEntities;
 
