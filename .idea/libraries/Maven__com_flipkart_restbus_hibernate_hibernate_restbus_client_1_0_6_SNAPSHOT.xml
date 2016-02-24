@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.flipkart.restbus.hibernate:hibernate-restbus-client:1.0.6-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/flipkart/restbus/hibernate/hibernate-restbus-client/1.0.6-SNAPSHOT/hibernate-restbus-client-1.0.6-20150629.103445-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/flipkart/restbus/hibernate/hibernate-restbus-client/1.0.6-SNAPSHOT/hibernate-restbus-client-1.0.6-20150629.103445-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/flipkart/restbus/hibernate/hibernate-restbus-client/1.0.6-SNAPSHOT/hibernate-restbus-client-1.0.6-20150629.103445-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

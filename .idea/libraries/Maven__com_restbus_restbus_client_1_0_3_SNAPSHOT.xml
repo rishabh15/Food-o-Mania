@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.restbus:restbus-client:1.0.3-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/restbus/restbus-client/1.0.3-SNAPSHOT/restbus-client-1.0.3-20141014.121242-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/restbus/restbus-client/1.0.3-SNAPSHOT/restbus-client-1.0.3-20141014.121242-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/restbus/restbus-client/1.0.3-SNAPSHOT/restbus-client-1.0.3-20141014.121242-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

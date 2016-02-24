@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.curator:curator-client:2.1.0-incubating.patched">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/curator/curator-client/2.1.0-incubating.patched/curator-client-2.1.0-incubating.patched.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/curator/curator-client/2.1.0-incubating.patched/curator-client-2.1.0-incubating.patched-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/curator/curator-client/2.1.0-incubating.patched/curator-client-2.1.0-incubating.patched-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
