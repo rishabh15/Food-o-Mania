@@ -1,10 +1,9 @@
 package com.ekart.hackfest.foodmania.services;
 
 import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
-import com.ekart.hackfest.foodmania.repository.CustomerDao;
-import com.ekart.hackfest.foodmania.repository.CustomerOrderDao;
-import com.ekart.hackfest.foodmania.repository.ItemDao;
-import com.ekart.hackfest.foodmania.repository.MenuDao;
+import com.ekart.hackfest.foodmania.model.ItemForOrderEntity;
+import com.ekart.hackfest.foodmania.model.Status;
+import com.ekart.hackfest.foodmania.repository.*;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -20,17 +19,22 @@ public class CustomerService {
     private CustomerOrderDao customerOrderDao;
     private ItemDao itemDao;
     private MenuDao menuDao;
+    private ItemForOrderDao itemForOrderDao;
 
     public CustomerService(CustomerOrderDao customerOrderDao)
     {
         this.customerOrderDao = customerOrderDao;
+
     }
 
 
-    /*public CustomerOrderEntity updateOrder(String orderId,String status)
+    public CustomerOrderEntity updateOrder(String orderId,Status status)
     {
         return customerOrderDao.updateOrder(orderId,status);
-    }*/
+    }
 
 
+    public CustomerOrderEntity getItemList(String orderId) {
+        return customerOrderDao.getItemList(orderId);
+    }
 }
