@@ -56,7 +56,7 @@ public class CustomerService {
 
     public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity) {
 
-<<<<<<< Updated upstream
+
         ReferenceCountEntity referenceCount = referenceCountDao.getReferenceCount();
         long count = referenceCount.getCount();
         String orderId = "ORD" + count;
@@ -67,10 +67,5 @@ public class CustomerService {
         return customerOrderDao.createOrder(customerOrderEntity);
     }
 
-=======
-       // String orderId = setOrderId();
-        //customerOrderEntity.setOrderid();
-        return customerOrderDao.createOrder(customerOrderEntity);
-    }
->>>>>>> Stashed changes
+
 }

@@ -52,7 +52,7 @@ public class CustomerController {
     @Timed
     @UnitOfWork(value = "master")
     @Produces(MediaType.APPLICATION_JSON)
-<<<<<<< Updated upstream
+
     public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity)
     {
          return customerService.createOrder(customerOrderEntity);
@@ -89,14 +89,10 @@ public class CustomerController {
         customerOrderEntity1.setItemForOrderEntities(itemForOrderEntityList1);
         return customerOrderEntity1;*/
     }
-=======
 
-    public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity)
-    {
-         return customerService.createOrder(customerOrderEntity);
-    }
 
->>>>>>> Stashed changes
+
+
 
 
 }
