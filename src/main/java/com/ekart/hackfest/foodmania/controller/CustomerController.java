@@ -2,6 +2,7 @@ package com.ekart.hackfest.foodmania.controller;
 
 import com.codahale.metrics.annotation.Timed;
 import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
+import com.ekart.hackfest.foodmania.model.ItemForOrderEntity;
 import com.ekart.hackfest.foodmania.model.MenuEntity;
 import com.ekart.hackfest.foodmania.model.Status;
 import com.ekart.hackfest.foodmania.services.CustomerService;
@@ -39,6 +40,14 @@ public class CustomerController {
            return customerService.updateOrder(orderId,status);
     }
 
-
+    @GET
+    @Timed
+    @UnitOfWork(value = "master")
+    @Path("/getOrderItem/{orderId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public CustomerOrderEntity getItemList(@PathParam("orderId") String orderId)
+    {
+        return customerService.getItemList(orderId);
+    }
 
 }

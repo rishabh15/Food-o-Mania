@@ -31,4 +31,14 @@ public class CustomerOrderDao extends AbstractDAO<CustomerOrderEntity> {
         output.setStatus(status.getStatus());
         return persist(output);
     }
+
+    public CustomerOrderEntity getItemList(String orderId)
+    {
+        Criteria c = criteria();
+
+        c.add(Restrictions.eq("orderid", orderId));
+        CustomerOrderEntity output = (CustomerOrderEntity)c.uniqueResult();
+        return output;
+    }
+
 }
