@@ -25,6 +25,16 @@
             <li><a href="#pending-hi_tl" onclick="addPendingHi()">CART<span
                     id="pending-hi_tl-badge" class="badge">10</span></a></li>
             <li>
+            <li> <a href="#" onclick="signOut();">Sign out</a>
+            <script>
+                function signOut() {
+                    var auth2 = gapi.auth2.getAuthInstance();
+                    auth2.signOut().then(function () {
+                        console.log('User signed out.');
+                    });
+                }
+            </script>
+        </li>
         </ul>
     </div>
 </nav>
