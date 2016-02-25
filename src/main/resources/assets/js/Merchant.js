@@ -1,6 +1,7 @@
 /**
  * Created by rishabh.sood on 25/02/16.
  */
+
 $(document).ready(function() {
     $.ajax({
         url: "api/foodmania/merchant/getOrders/MER001",
@@ -8,9 +9,10 @@ $(document).ready(function() {
         contentType: "application/json",
         async: false,
         success: function (data) {
+            var order = data.customerOrderEntities;
             console.log(data);
-            for (var i = 0; i < data.length; i++) {
-                addRow(data[i].orderid, data[i].status, data[i].time, data[i].price, data[i].customerEntity.name, data[i].customerEntity.phone);
+            for (var i = 0; i < order.length; i++) {
+                addRow(order[i].orderid, order[i].status, order[i].time, order[i].price, order[i].customerEntity.name, order[i].customerEntity.phone) ;
             }
         },
         error: function () {
@@ -28,9 +30,13 @@ function addRow(orderId, status, time, price, name, phone) {
         background = "lightgreen";
     } else if (status=="PROCESSED") {
         background = "yellow";
+    } else if (status=="CLOSED") {
+        background = "grey";
+    } else {
+        background = "red";
     }
     var table = $('#orderlist');
-    table.append('<tr style=\"background-color:'+background+'\"><td <div class=\"col-sm-2\">' +
+    table.append('<tr onclick=\"onRowClick(\''+orderId+'\')\" style=\"background-color:'+background+'\"><td <div class=\"col-sm-2\">' +
     '<label class="control-label">' + orderId + '</label>' +
     '</div>  </td> <td <div class=\"col-sm-2\">' +
     '<label class="control-label">' + status + '</label>' +
@@ -43,4 +49,18 @@ function addRow(orderId, status, time, price, name, phone) {
         '</div>  </td><td <div class=\"col-sm-2\">' +
         '<label class="control-label">' + phone + '</label>' +
         '</div>  </td></tr>')
+}
+
+function onRowClick(orderId) {
+    var table = $('#itemlist');
+    var item1 = "ITEM1";
+    document.getElementById("orderId").innerText= orderId;
+    table.append('<tr><td <div class=\"col-sm-2\">' +
+    '<label class="control-label">' + item1 + '</label>' +
+    '</div>  </td> <td <div class=\"col-sm-2\">' +
+    '<label class="control-label">' + item1 + '</label>' +
+    '</div>  </td> <td <div class=\"col-sm-2\">' +
+    '<label class="control-label">' + item1 + '</label>' +
+    '</div>  </td></tr>');
+    $('#itemModal').modal();
 }
