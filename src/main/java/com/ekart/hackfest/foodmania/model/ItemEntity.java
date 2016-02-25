@@ -1,5 +1,7 @@
 package com.ekart.hackfest.foodmania.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "Item", schema = "", catalog = "foodmania")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class ItemEntity {
 
     @Id

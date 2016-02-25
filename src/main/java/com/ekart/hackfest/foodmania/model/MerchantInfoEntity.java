@@ -1,5 +1,7 @@
 package com.ekart.hackfest.foodmania.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -13,6 +15,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "MerchantInfo", schema = "", catalog = "foodmania")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class MerchantInfoEntity {
 
     @Id

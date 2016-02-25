@@ -1,11 +1,12 @@
 package com.ekart.hackfest.foodmania.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "Menu", schema = "", catalog = "foodmania")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class MenuEntity {
 
     @Id
@@ -21,12 +23,8 @@ public class MenuEntity {
     private String menuid;
 
     @Basic
-    @Column(name = "STARTTIME")
-    private Timestamp starttime;
-
-    @Basic
-    @Column(name = "ENDTIME")
-    private Timestamp endtime;
+    @Column(name = "ACTIVE")
+    private String active;
 
     @ManyToOne
     @JoinColumn(name = "MERCHANTID", referencedColumnName = "MERCHANTID", nullable = false)
