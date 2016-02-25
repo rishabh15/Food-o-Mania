@@ -52,15 +52,35 @@ function addRow(orderId, status, time, price, name, phone) {
 }
 
 function onRowClick(orderId) {
-    var table = $('#itemlist');
-    var item1 = "ITEM1";
+    $.ajax({
+        url: "api/foodmania/customer/getOrderItem/"+orderId,
+        type: "GET",
+        contentType: "application/json",
+        async: false,
+        success: function (data) {
+            var order = data.itemForOrderEntities;
+            console.log(data);
+            for (var i = 0; i < order.length; i++) {
+                addItemRow(order[i].itemid, order[i].itemdesc, order[i].price) ;
+            }
+            $('#itemModal').modal();
+        },
+        error: function () {
+            alert("Error in finding Job List!!");
+        },
+        complete: function () {
+        }
+    })
+}
+
+function addItemRow(itemid, itemdesc, price) {
+    var table = $('#itemlist')
     document.getElementById("orderId").innerText= orderId;
     table.append('<tr><td <div class=\"col-sm-2\">' +
-    '<label class="control-label">' + item1 + '</label>' +
-    '</div>  </td> <td <div class=\"col-sm-2\">' +
-    '<label class="control-label">' + item1 + '</label>' +
-    '</div>  </td> <td <div class=\"col-sm-2\">' +
-    '<label class="control-label">' + item1 + '</label>' +
-    '</div>  </td></tr>');
-    $('#itemModal').modal();
+        '<label class="control-label">' + itemid + '</label>' +
+        '</div>  </td> <td <div class=\"col-sm-2\">' +
+        '<label class="control-label">' + itemdesc + '</label>' +
+        '</div>  </td> <td <div class=\"col-sm-2\">' +
+        '<label class="control-label">' + price + '</label>' +
+        '</div>  </td></tr>');
 }
