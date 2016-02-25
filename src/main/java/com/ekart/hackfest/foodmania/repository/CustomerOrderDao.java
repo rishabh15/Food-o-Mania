@@ -19,12 +19,7 @@ public class CustomerOrderDao extends AbstractDAO<CustomerOrderEntity> {
         super(sessionFactory);
     }
 
-    public List<CustomerOrderEntity> getOrderListByMerchant(String merchantId)
-    {
-        Criteria c = criteria();
-        System.out.println("key is " + merchantId);
-        c.add(Restrictions.eq("merchantInfoEntity", merchantId));
-        List<CustomerOrderEntity> output = c.list();
-        return output;
-    }
+
+
+    //public Cus
 }

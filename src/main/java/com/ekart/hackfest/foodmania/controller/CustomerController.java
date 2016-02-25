@@ -6,10 +6,8 @@ import com.ekart.hackfest.foodmania.model.MenuEntity;
 import com.ekart.hackfest.foodmania.services.CustomerService;
 import io.dropwizard.hibernate.UnitOfWork;
 import org.apache.log4j.Logger;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,28 +26,18 @@ public class CustomerController {
     }
 
 
-    @GET
-    @Timed
-    @UnitOfWork(value = "master")
-    @Path("/getOrders/{merchantId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<CustomerOrderEntity> getOrderListByMerchant(@PathParam("merchantId") String merchantId)
-    {
-        List<CustomerOrderEntity> customerOrderEntities = customerService.getOrderListByMerchant(merchantId);
-
-        return customerOrderEntities;
-    }
 
     /*@POST
-    @Path("/updateOrder/{orderId}/{statusName}")
+    @Path("/updateOrder/{orderId}")
     @Timed
     @UnitOfWork(value = "master")
     @Produces(MediaType.APPLICATION_JSON)
 
-    public CustomerOrderEntity updateOrder()
+    public CustomerOrderEntity updateOrder(@PathParam("orderId") String orderId,String status)
     {
-
-    }*/ 
+            CustomerOrderEntity customerOrderEntity = customerService.updateOrder(orderId,status);
+            return customerOrderEntity;
+    }*/
 
 
 

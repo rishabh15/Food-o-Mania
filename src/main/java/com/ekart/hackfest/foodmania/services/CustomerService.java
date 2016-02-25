@@ -25,11 +25,12 @@ public class CustomerService {
     {
         this.customerOrderDao = customerOrderDao;
     }
-    public List<CustomerOrderEntity> getOrderListByMerchant(String merchantId)
-    {
-        return customerOrderDao.getOrderListByMerchant(merchantId);
-    }
 
+
+    /*public CustomerOrderEntity updateOrder(String orderId,String status)
+    {
+        return customerOrderDao.updateOrder(orderId,status);
+    }*/
 
 
 }

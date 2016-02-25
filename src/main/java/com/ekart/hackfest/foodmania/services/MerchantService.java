@@ -2,6 +2,7 @@ package com.ekart.hackfest.foodmania.services;
 
 import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
 import com.ekart.hackfest.foodmania.model.MenuEntity;
+import com.ekart.hackfest.foodmania.model.MerchantInfoEntity;
 import com.ekart.hackfest.foodmania.repository.*;
 import org.apache.log4j.Logger;
 
@@ -27,6 +28,10 @@ public class MerchantService {
         return menuDao.getActiveMenu();
     }
 
+    public MerchantInfoEntity getOrderListByMerchant(String merchantId)
+    {
+        return merchantDao.getOrderListByMerchant(merchantId);
+    }
 
 
 }
