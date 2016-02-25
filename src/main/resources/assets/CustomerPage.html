@@ -22,13 +22,41 @@
             <a class="navbar-brand" href="#casper">Food O Mania</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#pending-hi_tl" onclick="addPendingHi()">CART<span
-                    id="pending-hi_tl-badge" class="badge">10</span></a></li>
+            <li><button type="button" class="button btn-primary btn-lg" style="background-color: darkgreen" data-toggle="modal" data-target="#cart" onclick="show_cart()">CART<span
+                    id="pending-hi_tl-badge" class="badge">0</span></button></li>
             <li>
         </ul>
     </div>
 </nav>
 
+<div class="container" id="customer_pages"/>
+
+<div class="modal fade" id="cart" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table id="cartheader" class="table table-condensed table-hover table-stripped">
+                    <thead>
+                    <tr>
+                        <th>ITEM</th>
+                        <th>PRICE</th>
+                        <th>COUNT</th>
+                        <th>TIME</th>
+                    </tr>
+                    </thead>
+                    <table id="carttable" class="table table-condensed table-hover table-stripped"/>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn " data-dismiss="modal" style="background-color: darkgreen;color: aliceblue;" onclick="place_order()">Place Order</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 
