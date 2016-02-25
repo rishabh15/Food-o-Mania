@@ -17,11 +17,9 @@ public class ReferenceCountDao extends AbstractDAO<ReferenceCountEntity> {
 
         super(sessionFactory);
     }
-    public ReferenceCountEntity getReferenceCount(String name)
+    public ReferenceCountEntity getReferenceCount()
     {
-        Criteria c = criteria();
-        c.add(Restrictions.eq("ORDERID", name));
-        ReferenceCountEntity output = (ReferenceCountEntity)c.uniqueResult();
+        ReferenceCountEntity output = get(0);
         return output;
     }
     public ReferenceCountEntity addReferenceCount(ReferenceCountEntity referenceCountEntity)

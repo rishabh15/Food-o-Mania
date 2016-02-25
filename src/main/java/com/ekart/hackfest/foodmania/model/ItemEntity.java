@@ -32,7 +32,7 @@ public class ItemEntity {
     private int price;
 
     @ManyToOne
-    @JoinColumn(name = "MENUID", referencedColumnName = "MENUID", nullable = false)
+    @JoinColumn(name = "MENUID", referencedColumnName = "MENUID")
     private MenuEntity menuEntity;
 
 }

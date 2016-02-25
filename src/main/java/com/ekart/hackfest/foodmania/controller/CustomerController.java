@@ -1,10 +1,7 @@
 package com.ekart.hackfest.foodmania.controller;
 
 import com.codahale.metrics.annotation.Timed;
-import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
-import com.ekart.hackfest.foodmania.model.ItemForOrderEntity;
-import com.ekart.hackfest.foodmania.model.MenuEntity;
-import com.ekart.hackfest.foodmania.model.Status;
+import com.ekart.hackfest.foodmania.model.*;
 import com.ekart.hackfest.foodmania.services.CustomerService;
 import io.dropwizard.hibernate.UnitOfWork;
 import org.apache.log4j.Logger;
@@ -55,12 +52,42 @@ public class CustomerController {
     @Timed
     @UnitOfWork(value = "master")
     @Produces(MediaType.APPLICATION_JSON)
-
     public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity)
     {
          return customerService.createOrder(customerOrderEntity);
+        /*CustomerOrderEntity customerOrderEntity1 = new CustomerOrderEntity();
+        CustomerEntity customerEntity1 = new CustomerEntity();
+        MerchantInfoEntity merchantInfoEntity1 = new MerchantInfoEntity();
+        List<ItemForOrderEntity> itemForOrderEntityList1 = new ArrayList<ItemForOrderEntity>();
+        ItemForOrderEntity itemForOrderEntity1 = new ItemForOrderEntity();
+        itemForOrderEntityList1.add(itemForOrderEntity1);
+
+        customerOrderEntity1.setCustomerEntity(customerEntity1);
+        customerOrderEntity1.setMerchantInfoEntity(merchantInfoEntity1);
+        customerOrderEntity1.setItemForOrderEntities(itemForOrderEntityList1);
+        return customerOrderEntity1;*/
     }
 
+    @GET
+    @Path("/getOrder")
+    @Timed
+    @UnitOfWork(value = "master")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CustomerOrderEntity> getOrder()
+    {
+        return customerService.getOrder();
+        /*CustomerOrderEntity customerOrderEntity1 = new CustomerOrderEntity();
+        CustomerEntity customerEntity1 = new CustomerEntity();
+        MerchantInfoEntity merchantInfoEntity1 = new MerchantInfoEntity();
+        List<ItemForOrderEntity> itemForOrderEntityList1 = new ArrayList<ItemForOrderEntity>();
+        ItemForOrderEntity itemForOrderEntity1 = new ItemForOrderEntity();
+        itemForOrderEntityList1.add(itemForOrderEntity1);
+
+        customerOrderEntity1.setCustomerEntity(customerEntity1);
+        customerOrderEntity1.setMerchantInfoEntity(merchantInfoEntity1);
+        customerOrderEntity1.setItemForOrderEntities(itemForOrderEntityList1);
+        return customerOrderEntity1;*/
+    }
 
 
 }

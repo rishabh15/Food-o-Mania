@@ -33,7 +33,7 @@ public class ItemForOrderEntity {
     private int count;
 
     @ManyToOne
-    @JoinColumn(name = "ORDERID", referencedColumnName = "ORDERID", nullable = false)
+    @JoinColumn(name = "ORDERID", referencedColumnName = "ORDERID")
     private CustomerOrderEntity customerOrderEntity;
 
 }

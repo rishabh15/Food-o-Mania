@@ -12,12 +12,12 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "ReferenceCount", schema = "", catalog = "foodmania")
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class ReferenceCountEntity {
 
     @Id
-    @Column(name = "Name")
-    private String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private int id;
 
     @Basic
     @Column(name = "COUNT")
