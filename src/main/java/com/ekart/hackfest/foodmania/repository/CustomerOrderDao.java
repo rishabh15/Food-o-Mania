@@ -4,6 +4,7 @@ import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
 import com.ekart.hackfest.foodmania.model.Status;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
@@ -41,4 +42,10 @@ public class CustomerOrderDao extends AbstractDAO<CustomerOrderEntity> {
         return output;
     }
 
+    public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity) {
+
+        Query query = this.currentSession().createSQLQuery("select COUNT FROM ReferenceCount");
+
+        return persist(customerOrderEntity);
+    }
 }

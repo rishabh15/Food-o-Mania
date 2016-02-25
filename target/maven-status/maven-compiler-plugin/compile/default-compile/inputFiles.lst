@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /Users/rishabh.sood/flipkart/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/model/ItemEntity.java
 /Users/rishabh.sood/flipkart/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/model/MerchantInfoEntity.java
 /Users/rishabh.sood/flipkart/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/model/MenuEntity.java
@@ -18,3 +19,25 @@
 /Users/rishabh.sood/flipkart/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/controller/DummyController.java
 /Users/rishabh.sood/flipkart/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/model/CustomerEntity.java
 /Users/rishabh.sood/flipkart/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/model/CustomerOrderEntity.java
+=======
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/repository/MenuDao.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/model/Status.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/application/SystemApplication.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/model/ItemForOrderEntity.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/repository/CustomerDao.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/services/CustomerService.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/controller/CustomerController.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/controller/DummyController.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/model/MerchantInfoEntity.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/repository/CustomerOrderDao.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/repository/MerchantDao.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/model/CustomerOrderEntity.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/repository/ItemDao.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/model/CustomerEntity.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/repository/ItemForOrderDao.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/services/MerchantService.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/application/SystemConfiguration.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/controller/MerchantController.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/model/ItemEntity.java
+/Users/vishal.bhandari/Food-o-Mania/src/main/java/com/ekart/hackfest/foodmania/model/MenuEntity.java
+>>>>>>> Stashed changes

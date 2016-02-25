@@ -5,6 +5,7 @@ import com.ekart.hackfest.foodmania.model.ItemForOrderEntity;
 import com.ekart.hackfest.foodmania.model.Status;
 import com.ekart.hackfest.foodmania.repository.*;
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,4 +38,12 @@ public class CustomerService {
     public CustomerOrderEntity getItemList(String orderId) {
         return customerOrderDao.getItemList(orderId);
     }
+
+    public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity) {
+
+        String orderId = setOrderId();
+        customerOrderEntity.setOrderid(orderId);
+        return customerOrderDao.createOrder(customerOrderEntity);
+    }
+
 }

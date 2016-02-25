@@ -50,4 +50,17 @@ public class CustomerController {
         return customerService.getItemList(orderId);
     }
 
+    @POST
+    @Path("/createOrder")
+    @Timed
+    @UnitOfWork(value = "master")
+    @Produces(MediaType.APPLICATION_JSON)
+
+    public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity)
+    {
+         return customerService.createOrder(customerOrderEntity);
+    }
+
+
+
 }
