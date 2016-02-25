@@ -8,6 +8,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
     <title>Merchant Screen</title>
+    <meta http-equiv="refresh" content="30">
 </head>
 <body>
 <!-- Modal -->
@@ -38,15 +39,41 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="menuModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Upload Menu in CSV File</h4>
+            </div>
+            <div class="modal-body">
+                <input type="file" id="myFile" multiple size="50" onchange="csvFile()">
+                <p id="demo"></p>
+                <table class="table table-condensed table-hover table-striped" cellspacing="2" id="menuItemlist" align="center" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Item Name</th>
+                        <th>Available</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="contactus">
     <h2 align="center">Merchant Screen</h2>
-    <section style="background:#ffffff;">
+    <section style="background:#efefe9;">
         <br>
         <div class="container">
             <div class="row">
                 <form class="form-horizontal">
                     <div class="col-sm-offset-10 col-sm-2">
-                        <button type="button" class="btn btn-success" onclick="addSubJobRow()"><span class="glyphicon glyphicon-plus"></span>Add Menu</button>
+                        <button type="button" class="btn btn-success" onclick="addMenu()"><span class="glyphicon glyphicon-plus"></span>Add Menu</button>
                     </div>
                     <div class="form-group">
                     <br>

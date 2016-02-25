@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
 import com.ekart.hackfest.foodmania.model.MenuEntity;
 import com.ekart.hackfest.foodmania.model.MerchantInfoEntity;
+import com.ekart.hackfest.foodmania.model.MerchantRefresh;
 import com.ekart.hackfest.foodmania.services.MerchantService;
 import io.dropwizard.hibernate.UnitOfWork;
 import org.apache.log4j.Logger;
@@ -55,12 +56,23 @@ public class MerchantController {
     @UnitOfWork(value = "master")
     @Path("/getOrders/{merchantId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public MerchantInfoEntity getOrderListByMerchant(@PathParam("merchantId") String merchantId)
+    public List<MerchantRefresh> getOrderListByMerchant(@PathParam("merchantId") String merchantId)
     {
-        MerchantInfoEntity merchantInfoEntity = merchantService.getOrderListByMerchant(merchantId);
+        List<MerchantRefresh> merchantInfoEntity = merchantService.getOrderListByMerchant(merchantId);
 
         return merchantInfoEntity;
     }
 
+    @GET
+    @Timed
+    @UnitOfWork(value = "master")
+    @Path("/getMenu/dummy")
+    @Produces(MediaType.APPLICATION_JSON)
+    public MenuEntity getOrderListByMerchant()
+    {
+        MenuEntity menuEntity = new MenuEntity();
+
+        return menuEntity;
+    }
 
 }

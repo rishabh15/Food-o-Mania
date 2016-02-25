@@ -9,10 +9,10 @@ $(document).ready(function() {
         contentType: "application/json",
         async: false,
         success: function (data) {
-            var order = data.customerOrderEntities;
+            var order = data;//data.customerOrderEntities;
             console.log(data);
             for (var i = 0; i < order.length; i++) {
-                addRow(order[i].orderid, order[i].status, order[i].time, order[i].price, order[i].customerEntity.name, order[i].customerEntity.phone) ;
+                addRow(order[i].orderId, order[i].status, order[i].time, order[i].price, order[i].name, order[i].phone) ;
             }
         },
         error: function () {
@@ -120,4 +120,68 @@ function updateOrderStatus() {
         complete: function () {
         }
 })
+}
+
+function addMenu() {
+    $('#menuModal').modal();
+}
+
+function csvFile() {
+    /*var x = document.getElementById("myFile");
+    var txt = "";
+    if ('files' in x) {
+        if (x.files.length == 0) {
+            txt = "Select one or more files.";
+        } else {
+            for (var i = 0; i < x.files.length; i++) {
+                txt += "<br><strong>" + (i+1) + ". file</strong><br>";
+                var file = x.files[i];
+                if ('name' in file) {
+                    txt += "name: " + file.name + "<br>";
+                }
+                if ('size' in file) {
+                    txt += "size: " + file.size + " bytes <br>";
+                }
+            }
+        }
+    }
+    else {
+        if (x.value == "") {
+            txt += "Select one or more files.";
+        } else {
+            txt += "The files property is not supported by your browser!";
+            txt  += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead.
+        }
+    }
+    document.getElementById("demo").innerHTML = txt;*/
+    var itemTable = $('#menuItemlist');
+    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+    if (regex.test($("#myFile").val().toLowerCase())) {
+        if (typeof (FileReader) != "undefined") {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var table = $("<table />");
+                var rows = e.target.result.split("\n");
+                for (var i = 0; i < rows.length; i++) {
+                    var row = $("<tr />");
+                    var cells = rows[i].split(",");
+                    for (var j = 0; j < cells.length; j++) {
+                        var cell = $("<td />");
+                        cell.html(cells[j]);
+                        row.append(cell);
+                        console.log(cells[j]);
+                    }
+                    table.append(row);
+                    itemTable.append(row);
+                }
+                //$("#dvCSV").html('');
+                //$("#dvCSV").append(table);
+            }
+            reader.readAsText($("#myFile")[0].files[0]);
+        } else {
+            alert("This browser does not support HTML5.");
+        }
+    } else {
+        alert("Please upload a valid CSV file.");
+    }
 }
