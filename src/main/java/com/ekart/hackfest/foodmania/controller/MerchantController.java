@@ -50,4 +50,17 @@ public class MerchantController {
         }
     }
 
+    @GET
+    @Timed
+    @UnitOfWork(value = "master")
+    @Path("/getOrders/{merchantId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public MerchantInfoEntity getOrderListByMerchant(@PathParam("merchantId") String merchantId)
+    {
+        MerchantInfoEntity merchantInfoEntity = merchantService.getOrderListByMerchant(merchantId);
+
+        return merchantInfoEntity;
+    }
+
+
 }

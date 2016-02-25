@@ -20,5 +20,13 @@ public class MerchantDao extends AbstractDAO<MerchantInfoEntity> {
         super(sessionFactory);
     }
 
+    public MerchantInfoEntity getOrderListByMerchant(String merchantId)
+    {
+        Criteria c = criteria();
+        System.out.println("key is " + merchantId);
+        c.add(Restrictions.eq("merchantid", merchantId));
+        MerchantInfoEntity output =(MerchantInfoEntity) c.uniqueResult();
+        return output;
+    }
 
 }
