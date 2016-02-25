@@ -61,7 +61,7 @@ function onRowClick(orderId) {
             var order = data.itemForOrderEntities;
             console.log(data);
             for (var i = 0; i < order.length; i++) {
-                addItemRow(order[i].itemid, order[i].itemdesc, order[i].price) ;
+                addItemRow(order[i].itemid, order[i].itemdesc, order[i].price, order[i].count) ;
             }
             $('#itemModal').modal();
         },
@@ -73,7 +73,7 @@ function onRowClick(orderId) {
     })
 }
 
-function addItemRow(itemid, itemdesc, price) {
+function addItemRow(itemid, itemdesc, price, count) {
     var table = $('#itemlist')
     document.getElementById("orderId").innerText= orderId;
     table.append('<tr><td <div class=\"col-sm-2\">' +
@@ -82,5 +82,7 @@ function addItemRow(itemid, itemdesc, price) {
         '<label class="control-label">' + itemdesc + '</label>' +
         '</div>  </td> <td <div class=\"col-sm-2\">' +
         '<label class="control-label">' + price + '</label>' +
+        '</div>  </td><td <div class=\"col-sm-2\">' +
+        '<label class="control-label">' + count + '</label>' +
         '</div>  </td></tr>');
 }
