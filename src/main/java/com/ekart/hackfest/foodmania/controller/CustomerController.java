@@ -31,16 +31,6 @@ public class CustomerController {
     @GET
     @Timed
     @UnitOfWork(value = "master")
-    @Path("/get")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getJob() {
-        return "Hello";
-    }
-
-
-    @GET
-    @Timed
-    @UnitOfWork(value = "master")
     @Path("/getOrders/{merchantId}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<CustomerOrderEntity> getOrderListByMerchant(@PathParam("merchantId") String merchantId)
