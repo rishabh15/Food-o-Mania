@@ -18,7 +18,7 @@ public class DummyController {
     @Timed
     @UnitOfWork(value = "master")
     @Path("/get")
-    @Produces("text/plain")
+    @Produces(MediaType.APPLICATION_JSON)
     public String getJob() {
         return "Hello";
     }

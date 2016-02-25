@@ -1,7 +1,13 @@
 package com.ekart.hackfest.foodmania.application;
 
+import com.ekart.hackfest.foodmania.controller.CustomerController;
 import com.ekart.hackfest.foodmania.controller.DummyController;
+import com.ekart.hackfest.foodmania.controller.MerchantController;
 import com.ekart.hackfest.foodmania.model.*;
+import com.ekart.hackfest.foodmania.repository.CustomerOrderDao;
+import com.ekart.hackfest.foodmania.repository.MerchantDao;
+import com.ekart.hackfest.foodmania.services.CustomerService;
+import com.ekart.hackfest.foodmania.services.MerchantService;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.db.DataSourceFactory;
@@ -40,6 +46,9 @@ public class SystemApplication extends Application<SystemConfiguration>{
                     Environment environment) {
         final DummyController controller1 = new DummyController();
         environment.jersey().register(controller1);
+        environment.jersey().register(new CustomerController(new CustomerService(new CustomerOrderDao(bundle.getSessionFactory()))));
+        environment.jersey().register(new MerchantController(new MerchantService(new MerchantDao(bundle.getSessionFactory()))));
+
     }
     
 }
