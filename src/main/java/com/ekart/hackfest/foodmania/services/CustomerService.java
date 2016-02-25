@@ -2,6 +2,7 @@ package com.ekart.hackfest.foodmania.services;
 
 import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
 import com.ekart.hackfest.foodmania.model.ItemForOrderEntity;
+import com.ekart.hackfest.foodmania.model.ReferenceCountEntity;
 import com.ekart.hackfest.foodmania.model.Status;
 import com.ekart.hackfest.foodmania.repository.*;
 import org.apache.log4j.Logger;
@@ -18,14 +19,15 @@ public class CustomerService {
     private static Logger logger = Logger.getLogger(CustomerService.class);
     private CustomerDao customerDao;
     private CustomerOrderDao customerOrderDao;
+    private ReferenceCountDao referenceCountDao;
     private ItemDao itemDao;
     private MenuDao menuDao;
     private ItemForOrderDao itemForOrderDao;
 
-    public CustomerService(CustomerOrderDao customerOrderDao)
+    public CustomerService(CustomerOrderDao customerOrderDao,ReferenceCountDao referenceCountDao)
     {
         this.customerOrderDao = customerOrderDao;
-
+        this.referenceCountDao = referenceCountDao;
     }
 
 
@@ -41,7 +43,12 @@ public class CustomerService {
 
     public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity) {
 
-        String orderId = setOrderId();
+        ReferenceCountEntity referenceCount = referenceCountDao.getReferenceCount("ORDERID");
+        long count = referenceCount.getCount();
+        String orderId = "ORD" + count;
+        count++;
+        referenceCount.setCount(count);
+        referenceCountDao.addReferenceCount(referenceCount);
         customerOrderEntity.setOrderid(orderId);
         return customerOrderDao.createOrder(customerOrderEntity);
     }

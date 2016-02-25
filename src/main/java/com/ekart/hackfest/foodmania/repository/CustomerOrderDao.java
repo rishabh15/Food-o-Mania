@@ -36,16 +36,12 @@ public class CustomerOrderDao extends AbstractDAO<CustomerOrderEntity> {
     public CustomerOrderEntity getItemList(String orderId)
     {
         Criteria c = criteria();
-
         c.add(Restrictions.eq("orderid", orderId));
         CustomerOrderEntity output = (CustomerOrderEntity)c.uniqueResult();
         return output;
     }
 
     public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity) {
-
-        Query query = this.currentSession().createSQLQuery("select COUNT FROM ReferenceCount");
-
         return persist(customerOrderEntity);
     }
 }
