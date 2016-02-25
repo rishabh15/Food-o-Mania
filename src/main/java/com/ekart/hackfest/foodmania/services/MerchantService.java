@@ -35,4 +35,11 @@ public class MerchantService {
     }
 
 
+    public MerchantInfoEntity createMenu(MenuEntity menuEntity,String merchantId) {
+        MerchantInfoEntity merchantInfoEntity = merchantDao.getMerchant(merchantId);
+        List<MenuEntity> menuEntityList = merchantInfoEntity.getMenuEntities();
+        menuEntityList.add(menuEntity);
+        merchantInfoEntity.setMenuEntities(menuEntityList);
+        return merchantDao.createMerchant(merchantInfoEntity);
+    }
 }

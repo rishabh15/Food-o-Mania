@@ -26,4 +26,9 @@ public class MenuDao extends AbstractDAO<MenuEntity> {
         List<MenuEntity> output = c.list();
         return output;
     }
+
+    public MenuEntity createMenu(MenuEntity menuEntity) {
+        return persist(menuEntity);
+
+    }
 }

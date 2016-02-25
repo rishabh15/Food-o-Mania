@@ -38,4 +38,17 @@ public class MerchantDao extends AbstractDAO<MerchantInfoEntity> {
         return list;
     }
 
+    public MerchantInfoEntity getMerchant(String merchantId)
+    {
+        Criteria c = criteria();
+        System.out.println("key is " + merchantId);
+        c.add(Restrictions.eq("merchantid", merchantId));
+        MerchantInfoEntity output =(MerchantInfoEntity) c.uniqueResult();
+        return output;
+    }
+
+    public MerchantInfoEntity createMerchant(MerchantInfoEntity merchantInfoEntity) {
+
+        return persist(merchantInfoEntity);
+    }
 }

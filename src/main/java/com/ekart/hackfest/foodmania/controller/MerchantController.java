@@ -1,18 +1,12 @@
 package com.ekart.hackfest.foodmania.controller;
 
 import com.codahale.metrics.annotation.Timed;
-import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
-import com.ekart.hackfest.foodmania.model.MenuEntity;
-import com.ekart.hackfest.foodmania.model.MerchantInfoEntity;
-import com.ekart.hackfest.foodmania.model.MerchantRefresh;
+import com.ekart.hackfest.foodmania.model.*;
 import com.ekart.hackfest.foodmania.services.MerchantService;
 import io.dropwizard.hibernate.UnitOfWork;
 import org.apache.log4j.Logger;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +67,26 @@ public class MerchantController {
         MenuEntity menuEntity = new MenuEntity();
 
         return menuEntity;
+    }
+
+    @POST
+    @Path("/createMenu/{merchantId}")
+    @Timed
+    @UnitOfWork(value = "master")
+    @Produces(MediaType.APPLICATION_JSON)
+
+    public MerchantInfoEntity createMenu(@PathParam("merchantId") String merchantId,MenuEntity menuEntity)
+    {
+
+        return merchantService.createMenu(menuEntity,merchantId);
+       /* MenuEntity menuEntity1 = new MenuEntity();
+        MerchantInfoEntity merchantInfoEntity1 = new MerchantInfoEntity();
+        List<ItemEntity> itemEntities = new ArrayList<ItemEntity>();
+        ItemEntity itemEntity = new ItemEntity();
+        itemEntities.add(itemEntity);
+        menuEntity1.setMerchantInfoEntity(merchantInfoEntity1);
+        menuEntity1.setItemEntities(itemEntities);
+        return menuEntity1;*/
     }
 
 }
