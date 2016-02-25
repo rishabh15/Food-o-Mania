@@ -42,11 +42,16 @@ public class CustomerOrderDao extends AbstractDAO<CustomerOrderEntity> {
     }
 
     public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity) {
+<<<<<<< Updated upstream
         return persist(customerOrderEntity);
     }
 
     public List<CustomerOrderEntity> getOrder() {
         Criteria c=criteria();
         return (List<CustomerOrderEntity>)c.list();
+=======
+
+        return persist(customerOrderEntity);
+>>>>>>> Stashed changes
     }
 }
