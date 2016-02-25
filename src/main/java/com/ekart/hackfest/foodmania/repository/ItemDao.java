@@ -14,5 +14,6 @@ public ItemDao(SessionFactory sessionFactory) {
         super(sessionFactory);
 
     }
+    //mdsahdsaj
 
 }
