@@ -3,6 +3,7 @@ package com.ekart.hackfest.foodmania.controller;
 import com.codahale.metrics.annotation.Timed;
 import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
 import com.ekart.hackfest.foodmania.model.MenuEntity;
+import com.ekart.hackfest.foodmania.model.Status;
 import com.ekart.hackfest.foodmania.services.CustomerService;
 import io.dropwizard.hibernate.UnitOfWork;
 import org.apache.log4j.Logger;
@@ -27,17 +28,16 @@ public class CustomerController {
 
 
 
-    /*@POST
+    @POST
     @Path("/updateOrder/{orderId}")
     @Timed
     @UnitOfWork(value = "master")
     @Produces(MediaType.APPLICATION_JSON)
 
-    public CustomerOrderEntity updateOrder(@PathParam("orderId") String orderId,String status)
+    public CustomerOrderEntity updateOrder(@PathParam("orderId") String orderId,Status status)
     {
-            CustomerOrderEntity customerOrderEntity = customerService.updateOrder(orderId,status);
-            return customerOrderEntity;
-    }*/
+           return customerService.updateOrder(orderId,status);
+    }
 
 
 

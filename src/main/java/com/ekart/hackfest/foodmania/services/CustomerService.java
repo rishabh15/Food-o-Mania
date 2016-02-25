@@ -1,6 +1,7 @@
 package com.ekart.hackfest.foodmania.services;
 
 import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
+import com.ekart.hackfest.foodmania.model.Status;
 import com.ekart.hackfest.foodmania.repository.CustomerDao;
 import com.ekart.hackfest.foodmania.repository.CustomerOrderDao;
 import com.ekart.hackfest.foodmania.repository.ItemDao;
@@ -27,10 +28,10 @@ public class CustomerService {
     }
 
 
-    /*public CustomerOrderEntity updateOrder(String orderId,String status)
+    public CustomerOrderEntity updateOrder(String orderId,Status status)
     {
         return customerOrderDao.updateOrder(orderId,status);
-    }*/
+    }
 
 
 }
