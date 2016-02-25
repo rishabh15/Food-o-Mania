@@ -40,6 +40,17 @@ public class CustomerController {
         return customerOrderEntities;
     }
 
+    /*@POST
+    @Path("/updateOrder/{orderId}/{statusName}")
+    @Timed
+    @UnitOfWork(value = "master")
+    @Produces(MediaType.APPLICATION_JSON)
+
+    public CustomerOrderEntity updateOrder()
+    {
+
+    }*/ 
+
 
 
 }
