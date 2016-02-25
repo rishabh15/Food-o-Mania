@@ -30,39 +30,18 @@ public class MerchantController {
         this.merchantService=merchantService;
     }
 
-    @GET
-    @Timed
-    @UnitOfWork(value = "master")
-    @Path("/get")
-    @Produces("text/plain")
-    public String getMenu() {
-        return "Hello";
-    }
-
-    @GET
-    @Timed
-    @UnitOfWork(value = "master")
-    @Path("/getOrders/{merchantId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<CustomerOrderEntity> getOrderListByMerchant(@PathParam("merchantId") String merchantId)
-    {
-        List<CustomerOrderEntity> customerOrderEntities = merchantService.getOrderListByMerchant(merchantId);
-
-        return customerOrderEntities;
-    }
-
 
     @GET
     @Timed
     @UnitOfWork(value = "master")
     @Path("/getMenu")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<MerchantInfoEntity> getAllMerchantWithMenuList()
+    public List<MenuEntity> getActiveMenu()
     {
-        List<MerchantInfoEntity> menuEntityList = new ArrayList<MerchantInfoEntity>();
+        List<MenuEntity> menuEntityList = new ArrayList<MenuEntity>();
         try
         {
-            //menuEntityList=merchantService.getAllMerchantWithMenuList();
+            menuEntityList=merchantService.getActiveMenu();
         }catch(Exception e)
         {
             logger.error(e.getMessage(),e);

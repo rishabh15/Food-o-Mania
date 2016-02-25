@@ -1,6 +1,7 @@
 package com.ekart.hackfest.foodmania.repository;
 
 import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
+import com.ekart.hackfest.foodmania.model.MenuEntity;
 import com.ekart.hackfest.foodmania.model.MerchantInfoEntity;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.Criteria;
@@ -19,15 +20,5 @@ public class MerchantDao extends AbstractDAO<MerchantInfoEntity> {
         super(sessionFactory);
     }
 
-    public MerchantInfoEntity getOrderListByMerchant(String merchantId)
-    {
-        Criteria c = criteria();
-        System.out.println("key is " + merchantId);
-        c.add(Restrictions.eq("merchantid", merchantId));
 
-        MerchantInfoEntity output = (MerchantInfoEntity)c.uniqueResult();
-
-        
-        return output;
-    }
 }
