@@ -42,7 +42,7 @@ $( document ).ready(function() {
             $.each(data, function (i, item) {
                 var container = $('#customer_pages');
                 console.log(item);
-                console.log(item.merchantInfoEntity.merchantid);
+              //  console.log(item.merchantInfoEntity.merchantid);
                 CustomerPage.merchant[item.merchantInfoEntity.merchantid] =new Object();
                 merchantname=item.merchantInfoEntity.name;
                 merchantid=item.merchantInfoEntity.merchantid
@@ -146,6 +146,7 @@ function place_order()
 
     var orders= "";
 
+var primary=1
         Object.keys(CustomerPage.order).forEach(function (key) {
             var item = CustomerPage.order[key]
 
@@ -154,9 +155,9 @@ function place_order()
                 item.item_time=document.getElementById('time'+item.item_id).value;
 
                     var order = "{" + "\n" +
-                        "\"@id\":\"" + 1 + "\",\n" +
+                        "\"@id\":\"" + primary + "\",\n" +
                         "\"orderid\":\"" + null + "\",\n" +
-                        "\"price\":" + item.item_price + ",\n" +
+                        "\"price\":" + (item.item_price)*(CustomerPage.order[item.item_id].item_count) + ",\n" +
                         "\"time\":\"" + item.item_time + "\",\n" +
                         "\"comments\":" + "\"hot and spicy\""+ ",\n" +
                         "\"status\":" + "\"OPEN\"" + ",\n" +
@@ -166,18 +167,19 @@ function place_order()
                         "\"itemForOrderEntities\":" + "[{\"itemid\":"  + "\"" + item.item_id + "\"" + ",\n" +
                         "\"itemdesc\":\"" + item.item_name + "\",\n" +
                         "\"price\":\"" + item.item_price + "\",\n" +
-                        "\"count\":\"" + item.item_count + "\",\n" +
-                        "\"customerOrderEntity\":\"" +1 + "\"\n" +
+                        "\"count\":\"" + CustomerPage.order[item.item_id].item_count + "\",\n" +
+                        "\"customerOrderEntity\":\"" +primary + "\"\n" +
                         "}]}";
 
                 orders=orders.concat(order).concat(',')
-                console.log(order);
+
             }
+            primary++
         })
     orders = orders.slice(0, -1);
-var final_order="[" + orders+"]"
+var final_order="["+orders+"]"
 
-    console.log("final_order"+orders)
+    console.log("final_order"+final_order)
     $.ajax({
         url: " http://localhost:10000/api/foodmania/customer/createOrder",
         type: "POST",

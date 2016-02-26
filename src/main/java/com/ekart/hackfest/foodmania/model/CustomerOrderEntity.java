@@ -30,7 +30,7 @@ public class CustomerOrderEntity {
 
     @Basic
     @Column(name = "TIME")
-    private Time time;
+    private String time;
 
     @Basic
     @Column(name = "COMMENTS")
