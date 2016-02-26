@@ -12,5 +12,6 @@ public class CustomerFinalOrder {
     private String orderId;
     private List<String> itemNameList;
     private String time;
+    private String status;
 
 }
