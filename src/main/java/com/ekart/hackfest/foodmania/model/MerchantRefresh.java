@@ -11,7 +11,6 @@ import lombok.Data;
 public class MerchantRefresh {
     public String orderId;
     public String status;
-    public String time;
     public int price;
     public String time;
     public String name;

@@ -19,7 +19,8 @@
                 <h4 class="modal-title" id="orderId">Create Account</h4>
             </div>
             <div class="modal-body">
-                <form name="login">
+                <section class="loginform cf" style="background:#efefe9;">
+                <form name="login" class="form-horizontal">
                     <ul>
                         <li>
                             <label for="usermail">Username</label>
@@ -45,11 +46,8 @@
                             <input type="text" id="email" placeholder="Enter email" required></li>
                         <li>
                         <li>
-                            <label for="password">Email</label>
-                            <input type="text" name="password" placeholder="Enter Password" required></li>
-                        <li>
-                        <li>
-                        <select style="position:absolute;top:0px;left:0px;width:200px; height:25px;line-height:20px;margin:0;padding:0;" onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
+                        <label for="dropbox">Select Type</label>
+                        <select id="dropbox" onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
                             <option></option>
                             <option value="Customer">Customer</option>
                             <option value="Merchant">Merchant</option>
@@ -61,6 +59,7 @@
                         </li>
                     </ul>
                 </form>
+                </section>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -72,12 +71,12 @@
     <form name="login">
         <ul>
             <li>
-                <label for="usermail">Username</label>
-                <input type="text" name="usermail" placeholder="Enter Username" required>
+                <label for="user-name">Username</label>
+                <input type="text" id="user-name" placeholder="Enter Username" required>
             </li>
             <li>
-                <label for="password">Password</label>
-                <input type="password" name="password" placeholder="Enter Password" required></li>
+                <label for="user-password">Password</label>
+                <input type="password" id="user-password" placeholder="Enter Password" required></li>
             <li>
                 <input type="submit" value="Login" onclick="enter()">
                 <input type="submit" value="SignUp" onclick="signUp()">
