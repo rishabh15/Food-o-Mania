@@ -12,6 +12,7 @@ public class MerchantRefresh {
     public String orderId;
     public String status;
     public int price;
+    public String time;
     public String name;
     public String phone;
 }
