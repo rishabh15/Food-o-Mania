@@ -2,6 +2,7 @@
  * Created by nitish.ojha on 25/02/16.
  */
 var CustomerPage = {
+  order_id:"test",
     userid: "",
     order_count: 0,
     placed_orders: [{
@@ -43,6 +44,7 @@ var CustomerPage = {
             contentType: "application/json",
             success: function (data) {
                 $.each(data, function (i, item) {
+                  console.log("item status is " +item.status );
                     if(item.status=="OPEN") {
                         addItemRowOrder(item.orderId, item.itemNameList, item.time, item.status);
                     }
@@ -59,15 +61,20 @@ var CustomerPage = {
 }
 
 function addItemRowOrder(order_id,item_name,time, status) {
+   CustomerPage.order_id=order_id;
+    time1=time.split(":");
+    order=order_id
     var table=$('#orderTable')
-    table.append('<tr id=' + order_id + '><td <div class=\"col-sm-2\">' +
+    table.append('<tr><td<div class=\"col-sm-2\">' +
+    '<label class="control-label">' + order_id + '</label>' +
+    '</div><td <div class=\"col-sm-2\">' +
     '<label class="control-label">' + item_name + '</label>' +
     '</div> <td <div class=\"col-sm-2\">' +
     '<label class="control-label">' + time + '</label>' +
     '</div> </td> <td <div class=\"col-sm-1\">' +
     '<label class="control-label">' + status + '</label>' +
-    '</div> </td><td <div class=\"col-sm-2\">' +
-    '<button type="button" class="button-xs" onclick="cancel(' + order_id + ')">Cancel</button>' +
+    '</div> </td><td <div id='+order_id+' value='+order_id+' class=\"col-sm-2\">' +
+    '<button id='+order_id+' type="button" class="button-xs" onclick="cancel(' + CustomerPage.order_id+ ','+time1[0]+')">Cancel</button>' +
     '</div></tr>');
 
 }
@@ -200,6 +207,12 @@ function place_order() {
         if (item.item_count > 0) {
             item.item_time = document.getElementById('time' + item.item_id).value;
 
+
+            if(item.item_time=="")
+            {
+                alert("Please Fill Time");
+                return;
+            }
             var order = "{" + "\n" +
                 "\"@id\":\"" + primary + "\",\n" +
                 "\"orderid\":\"" + null + "\",\n" +
@@ -225,6 +238,7 @@ function place_order() {
     orders = orders.slice(0, -1);
     var final_order = "[" + orders + "]"
 
+
     console.log("final_order" + final_order)
     $.ajax({
         url: " http://localhost:10000/api/foodmania/customer/createOrder",
@@ -243,50 +257,56 @@ function place_order() {
     });
 }
 
+
 function cancel(id,time)
 {
-   var json ="{ \"status\": \"CLOSED\""+"}"
 
+
+    console.log("time is,id is"+time +"id is"+ CustomerPage.order_id);
     var d = new Date();
-    var n = d.getHours();
     var current_time = d.getHours();
-    if((time[0]-current_time)<1)
+    console.log("current_hour is" + current_time , "time is " + time)
+    if(time-current_time>1)
     {
+        var json ="{ \"status\": \"CLOSED\""+"}"
         $.ajax({
-        url: "http://localhost:10000/api/foodmania/customer/updateOrder/"+id,
-        type: "POST",
-        contentType: "application/json",
-        data: json,
-        success: function (data) {
-
-            console.log("current time "+current_time);
-            time1=time.split(":");
-
-                var json ="{ \"status\": \"CUSTOMER_UNRESPONSIVE\""+"}"
-                $.ajax({
-                    url: "http://localhost:10000/api/foodmania/customer/updateOrder/"+id,
-                    type: "POST",
-                    contentType: "application/json",
-                    data: json,
-                    success: function (data) {},
-                    error: function (exception) {
-                        alert("Cannot Update Order" + exception);
-                    },
-                    complete: function () {
-                    }
-                });
-
-
+            url: "http://localhost:10000/api/foodmania/customer/updateOrder/"+CustomerPage.order_id,
+            type: "POST",
+            contentType: "application/json",
+            data: json,
+            success: function (data) {
+                alert("Successfully Canceled")
+                $('#orderTable').empty();
+                CustomerPage.show_orders();
+            },
+            error: function (exception) {
+                alert("Cannot Update Order" + exception);
+            },
+            complete: function () {
             }
-       alert("Succesfully Closed Order");
-        },
-        error: function (exception) {
-            alert("Cannot Update Order" + exception);
-        },
-        complete: function () {
+        });
+    }
+    else{
+        var json ="{ \"status\": \"CUSTOMER_UNRESPONSIVE\""+"}"
+        console.log("json is" + json);
+        $.ajax({
+            url: "http://localhost:10000/api/foodmania/customer/updateOrder/"+CustomerPage.order_id,
+            type: "POST",
+            contentType: "application/json",
+            data: json,
+            success: function (data) {
+                alert("You have cancelled very late")
+                $('#orderTable').empty();
+                CustomerPage.show_orders();
+            },
 
-        }
-    });
+            error: function (exception) {
+                alert("Cannot Update Order" + exception);
+            },
+            complete: function () {
+            }
+        });
+    }
 }
 function signOut()
 {

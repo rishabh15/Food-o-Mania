@@ -185,3 +185,10 @@ function csvFile() {
         alert("Please upload a valid CSV file.");
     }
 }
+
+
+
+function SignoutMerchant()
+{
+    window.location = "/login.html";
+}
