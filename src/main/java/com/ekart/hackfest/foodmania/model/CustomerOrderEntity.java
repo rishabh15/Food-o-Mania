@@ -7,6 +7,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class CustomerOrderEntity {
 
     @Basic
     @Column(name = "TIME")
-    private Timestamp time;
+    private Time time;
 
     @Basic
     @Column(name = "COMMENTS")
@@ -40,11 +41,11 @@ public class CustomerOrderEntity {
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "CUSTOMERID", referencedColumnName = "CUSTOMERID", nullable = false)
+    @JoinColumn(name = "CUSTOMERID", referencedColumnName = "CUSTOMERID")
     private CustomerEntity customerEntity;
 
     @ManyToOne
-    @JoinColumn(name = "MERCHANTID", referencedColumnName = "MERCHANTID", nullable = false)
+    @JoinColumn(name = "MERCHANTID", referencedColumnName = "MERCHANTID")
     private MerchantInfoEntity merchantInfoEntity;
 
     @OneToMany(mappedBy = "customerOrderEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)

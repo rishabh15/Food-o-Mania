@@ -27,7 +27,7 @@ public class MenuEntity {
     private String active;
 
     @ManyToOne
-    @JoinColumn(name = "MERCHANTID", referencedColumnName = "MERCHANTID", nullable = false)
+    @JoinColumn(name = "MERCHANTID", referencedColumnName = "MERCHANTID")
     private MerchantInfoEntity merchantInfoEntity;
 
     @OneToMany(mappedBy = "menuEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)

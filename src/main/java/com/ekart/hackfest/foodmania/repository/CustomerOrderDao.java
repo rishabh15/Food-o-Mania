@@ -1,8 +1,10 @@
 package com.ekart.hackfest.foodmania.repository;
 
 import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
+import com.ekart.hackfest.foodmania.model.Status;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
@@ -19,12 +21,38 @@ public class CustomerOrderDao extends AbstractDAO<CustomerOrderEntity> {
         super(sessionFactory);
     }
 
-    public List<CustomerOrderEntity> getOrderListByMerchant(String merchantId)
+
+
+    public CustomerOrderEntity updateOrder(String orderId,Status status)
     {
         Criteria c = criteria();
-        System.out.println("key is " + merchantId);
-        c.add(Restrictions.eq("merchantInfoEntity", merchantId));
-        List<CustomerOrderEntity> output = c.list();
+
+        c.add(Restrictions.eq("orderid", orderId));
+        CustomerOrderEntity output = (CustomerOrderEntity)c.uniqueResult();
+        output.setStatus(status.getStatus());
+        return persist(output);
+    }
+
+    public CustomerOrderEntity getItemList(String orderId)
+    {
+        Criteria c = criteria();
+        c.add(Restrictions.eq("orderid", orderId));
+        CustomerOrderEntity output = (CustomerOrderEntity)c.uniqueResult();
         return output;
+    }
+
+    public List<CustomerOrderEntity> createOrder(List<CustomerOrderEntity> customerOrderEntityList) {
+
+        for(CustomerOrderEntity customerOrderEntity:customerOrderEntityList) {
+             persist(customerOrderEntity);
+        }
+        return customerOrderEntityList;
+    }
+
+    public List<CustomerOrderEntity> getOrder() {
+        Criteria c = criteria();
+        return (List<CustomerOrderEntity>) c.list();
+
+
     }
 }

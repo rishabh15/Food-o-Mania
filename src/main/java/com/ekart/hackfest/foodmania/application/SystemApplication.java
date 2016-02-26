@@ -7,6 +7,7 @@ import com.ekart.hackfest.foodmania.model.*;
 import com.ekart.hackfest.foodmania.repository.CustomerOrderDao;
 import com.ekart.hackfest.foodmania.repository.MenuDao;
 import com.ekart.hackfest.foodmania.repository.MerchantDao;
+import com.ekart.hackfest.foodmania.repository.ReferenceCountDao;
 import com.ekart.hackfest.foodmania.services.CustomerService;
 import com.ekart.hackfest.foodmania.services.MerchantService;
 import io.dropwizard.Application;
@@ -20,7 +21,7 @@ import io.dropwizard.setup.Environment;
  * Created by rishabh.sood on 23/02/16.
  */
 public class SystemApplication extends Application<SystemConfiguration>{
-    public static final HibernateBundle<SystemConfiguration> bundle = new HibernateBundle<SystemConfiguration>(CustomerEntity.class, CustomerOrderEntity.class, MerchantInfoEntity.class, MenuEntity.class, ItemEntity.class, ItemForOrderEntity.class) {
+    public static final HibernateBundle<SystemConfiguration> bundle = new HibernateBundle<SystemConfiguration>(CustomerEntity.class, CustomerOrderEntity.class, MerchantInfoEntity.class, MenuEntity.class, ItemEntity.class, ItemForOrderEntity.class,ReferenceCountEntity.class) {
         @Override
         protected String name() {
             return "master";
@@ -47,8 +48,8 @@ public class SystemApplication extends Application<SystemConfiguration>{
                     Environment environment) {
         final DummyController controller1 = new DummyController();
         environment.jersey().register(controller1);
-        environment.jersey().register(new CustomerController(new CustomerService(new CustomerOrderDao(bundle.getSessionFactory()))));
-        environment.jersey().register(new MerchantController(new MerchantService(new MerchantDao(bundle.getSessionFactory()),new MenuDao(bundle.getSessionFactory()))));
+        environment.jersey().register(new CustomerController(new CustomerService(new CustomerOrderDao(bundle.getSessionFactory()),new ReferenceCountDao(bundle.getSessionFactory()  ))));
+        environment.jersey().register(new MerchantController(new MerchantService(new MerchantDao(bundle.getSessionFactory()),new MenuDao(bundle.getSessionFactory()),new ReferenceCountDao(bundle.getSessionFactory()))));
 
     }
     
