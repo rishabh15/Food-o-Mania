@@ -36,7 +36,7 @@ public class CustomerOrderDao extends AbstractDAO<CustomerOrderEntity> {
     public CustomerOrderEntity getItemList(String orderId)
     {
         Criteria c = criteria();
-        c.add(Restrictions.eq("orderid", orderId));
+        c.add(Restrictions.eq("CUSTOMERID", orderId));
         CustomerOrderEntity output = (CustomerOrderEntity)c.uniqueResult();
         return output;
     }
@@ -54,5 +54,11 @@ public class CustomerOrderDao extends AbstractDAO<CustomerOrderEntity> {
         return (List<CustomerOrderEntity>) c.list();
 
 
+    }
+
+    public List<CustomerOrderEntity> getOrderSummary(String customerId)
+    {
+        List<CustomerOrderEntity> output = getOrder();
+        return output;
     }
 }
