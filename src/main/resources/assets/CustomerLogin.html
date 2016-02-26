@@ -5,9 +5,25 @@
     <meta name="google-signin-client_id" content="366094543848-oc8togp5ti6fdrn7jmjmnf9puo9jb8ui.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
-<body>
-<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-<script>
+
+<style>
+    body {
+        background: url(img/food3.jpg) no-repeat;
+        background-size: 100%;
+     }
+    .Glogin {
+        position: absolute; top: 35%; left: 50%; transform: translateX(-50%) translateY(-50%);
+    }
+</style>
+
+
+<div class="Glogin" >
+<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="width: 400px;height: 60px;">
+</div>
+    <h2 style="color:blue" align="center">With your Flipkart account</h2>
+    </div>
+
+    <script>
     function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
@@ -19,10 +35,30 @@
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
-        window.location.href = "http://localhost:10000/CustomerPage.html"
-    };
+
+        sessionStorage.setItem('username', profile.getName());
+
+        var emailString = profile.getEmail();
+        console.log("domain : " + emailString);
+        var yourDomain = '@flipkart.com';
+        var domain = emailString.substr(emailString.length - yourDomain.length);
+        console.log("yourDomain: " + yourDomain);
+        console.log("domain : " + domain);
+        if (domain == yourDomain)
+            window.location.href = "http://localhost:10000/CustomerPage.html"
+
+        else { signOut();
+            function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    console.log('User signed out.');
+                });
+            }
+        }
+    }
 </script>
 
+<!--
 <a href="#" onclick="signOut();">Sign out</a>
 <script>
     function signOut() {
@@ -32,6 +68,6 @@
         });
     }
 </script>
-
+-->
 </body>
 </html>

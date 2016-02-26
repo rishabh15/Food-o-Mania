@@ -1,3 +1,8 @@
 .badge {
     background-color: darkblue;
 }
+
+.panel{
+    width: inherit;
+    background-color: azure;
+}

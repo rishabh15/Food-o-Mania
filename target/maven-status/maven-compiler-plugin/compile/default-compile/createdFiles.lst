@@ -15,7 +15,10 @@ com/ekart/hackfest/foodmania/services/MerchantService.class
 com/ekart/hackfest/foodmania/model/ItemEntity.class
 com/ekart/hackfest/foodmania/model/MenuEntity.class
 com/ekart/hackfest/foodmania/repository/CustomerOrderDao.class
+<<<<<<< HEAD
 com/ekart/hackfest/foodmania/model/Status.class
+=======
+>>>>>>> f9371479cf1485ff7ca6c5e857c8fde58c4c0495
 com/ekart/hackfest/foodmania/repository/CustomerDao.class
 com/ekart/hackfest/foodmania/model/ItemForOrderEntity.class
 com/ekart/hackfest/foodmania/repository/ItemForOrderDao.class
