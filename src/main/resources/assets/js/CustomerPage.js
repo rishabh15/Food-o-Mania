@@ -2,42 +2,79 @@
  * Created by nitish.ojha on 25/02/16.
  */
 var CustomerPage = {
-  order_count:0,
-   placed_orders:[{
-       orderid:"",
-       item_name:"",
-       status:"OPEN",
-       time:""
-   }],
+    userid: "",
+    order_count: 0,
+    placed_orders: [{
+        orderid: "",
+        item_name: "",
+        status: "OPEN",
+        time: ""
+    }],
 
     menu: {},
     count: 0,
     order: [{
-        item_merchant_id:null,
-        item_merchant_name:"",
-        item_id:"",
-        item_name:"",
-        item_count:0,
-        item_price:0,
-        item_time:""
+        item_merchant_id: null,
+        item_merchant_name: "",
+        item_id: "",
+        item_name: "",
+        item_count: 0,
+        item_price: 0,
+        item_time: ""
     }],
-    merchant_order:[{
-        merchant_present:0,
-        total_price:0,
-        merchant_name:"",
-        merchant_id:"",
-        customer_name:"Nitish",
-        customer_id:"Cust001",
-        customer_number:9620307284,
-        time:""
-}],
+    merchant_order: [{
+        merchant_present: 0,
+        total_price: 0,
+        merchant_name: "",
+        merchant_id: "",
+        customer_name: "Nitish",
+        customer_id: "Cust001",
+        customer_number: 9620307284,
+        time: ""
+    }],
 
-    merchant: ""
+    merchant: "",
+
+
+    show_orders: function () {
+        $.ajax({
+            url: "http://localhost:10000/api/foodmania/customer/getOrderSummary/" + CustomerPage.userid,
+            type: "GET",
+            contentType: "application/json",
+            success: function (data) {
+                $.each(data, function (i, item) {
+                    if(item.status=="OPEN") {
+                        addItemRowOrder(item.orderId, item.itemNameList, item.time, item.status);
+                    }
+                    })
+            },
+            error: function (exception) {
+                alert("Cannot Create Order" + exception);
+            },
+            complete: function () {
+
+            }
+        });
+    }
+}
+
+function addItemRowOrder(order_id,item_name,time, status) {
+    var table=$('#orderTable')
+    table.append('<tr id=' + order_id + '><td <div class=\"col-sm-2\">' +
+    '<label class="control-label">' + item_name + '</label>' +
+    '</div> <td <div class=\"col-sm-2\">' +
+    '<label class="control-label">' + time + '</label>' +
+    '</div> </td> <td <div class=\"col-sm-1\">' +
+    '<label class="control-label">' + status + '</label>' +
+    '</div> </td><td <div class=\"col-sm-2\">' +
+    '<button type="button" class="button-xs" onclick="cancel(' + order_id + ')">Cancel</button>' +
+    '</div></tr>');
+
 }
 
 $( document ).ready(function() {
 
-
+CustomerPage.userid="CUST001";
     console.log("called document ready");
     $.ajax({
         url: "http://localhost:10000/api/foodmania/merchant/getMenu",
@@ -92,7 +129,7 @@ function add(item,merchantname,merchantid)
 
 }
 
-function addItemRow(item_id,merchantName,itemdesc, price, count,time,merchant_id) {
+function addItemRow(item_id,merchantName,itemdesc, price, count,time,merchant_id,table) {
 
     var table = $('#carttable')
 
@@ -144,52 +181,51 @@ function show_cart()
         var item = CustomerPage.order[key]
             if(item.item_count>0)
             {
-            addItemRow(item.item_id,item.item_merchant_name,item.item_name, item.item_price * item.item_count, item.item_count,item.merchant_id);
+            addItemRow(item.item_id,item.item_merchant_name,item.item_name, item.item_price * item.item_count, item.item_count,item.merchant_id,$('#carttable'));
             }
         })
 
 
 }
 
-function place_order()
-{
+function place_order() {
 
-    var orders= "";
+    var orders = "";
 
-var primary=1
-        Object.keys(CustomerPage.order).forEach(function (key) {
-            var item = CustomerPage.order[key]
+    var primary = 1
+    Object.keys(CustomerPage.order).forEach(function (key) {
+        var item = CustomerPage.order[key]
 
-            console.log("final item is",item);
-            if (item.item_count > 0) {
-                item.item_time=document.getElementById('time'+item.item_id).value;
+        console.log("final item is", item);
+        if (item.item_count > 0) {
+            item.item_time = document.getElementById('time' + item.item_id).value;
 
-                    var order = "{" + "\n" +
-                        "\"@id\":\"" + primary + "\",\n" +
-                        "\"orderid\":\"" + null + "\",\n" +
-                        "\"price\":" + (item.item_price)*(CustomerPage.order[item.item_id].item_count) + ",\n" +
-                        "\"time\":\"" + item.item_time + "\",\n" +
-                        "\"comments\":" + "\"hot and spicy\""+ ",\n" +
-                        "\"status\":" + "\"OPEN\"" + ",\n" +
-                        "\"customerEntity\":" + "{\"customerid\":" + "\"CUST001\"" + "\n" +
-                        "},\n" +
-                        "\"merchantInfoEntity\":" + "{\"merchantid\":" + "\"" +CustomerPage.order[item.item_id].item_merchant_id + "\"" + "\},\n" +
-                        "\"itemForOrderEntities\":" + "[{\"itemid\":"  + "\"" + item.item_id + "\"" + ",\n" +
-                        "\"itemdesc\":\"" + item.item_name + "\",\n" +
-                        "\"price\":\"" + item.item_price + "\",\n" +
-                        "\"count\":\"" + CustomerPage.order[item.item_id].item_count + "\",\n" +
-                        "\"customerOrderEntity\":\"" +primary + "\"\n" +
-                        "}]}";
+            var order = "{" + "\n" +
+                "\"@id\":\"" + primary + "\",\n" +
+                "\"orderid\":\"" + null + "\",\n" +
+                "\"price\":" + (item.item_price) * (CustomerPage.order[item.item_id].item_count) + ",\n" +
+                "\"time\":\"" + item.item_time + "\",\n" +
+                "\"comments\":" + "\"hot and spicy\"" + ",\n" +
+                "\"status\":" + "\"OPEN\"" + ",\n" +
+                "\"customerEntity\":" + "{\"customerid\":" + "\"CUST001\"" + "\n" +
+                "},\n" +
+                "\"merchantInfoEntity\":" + "{\"merchantid\":" + "\"" + CustomerPage.order[item.item_id].item_merchant_id + "\"" + "\},\n" +
+                "\"itemForOrderEntities\":" + "[{\"itemid\":" + "\"" + item.item_id + "\"" + ",\n" +
+                "\"itemdesc\":\"" + item.item_name + "\",\n" +
+                "\"price\":\"" + item.item_price + "\",\n" +
+                "\"count\":\"" + CustomerPage.order[item.item_id].item_count + "\",\n" +
+                "\"customerOrderEntity\":\"" + primary + "\"\n" +
+                "}]}";
 
-                orders=orders.concat(order).concat(',')
+            orders = orders.concat(order).concat(',')
 
-            }
-            primary++
-        })
+        }
+        primary++
+    })
     orders = orders.slice(0, -1);
-    var final_order="["+orders+"]"
+    var final_order = "[" + orders + "]"
 
-    console.log("final_order"+final_order)
+    console.log("final_order" + final_order)
     $.ajax({
         url: " http://localhost:10000/api/foodmania/customer/createOrder",
         type: "POST",
@@ -197,7 +233,6 @@ var primary=1
         data: final_order,
         crossDomain: true,
         success: function (data) {
-            populate_order(data)
         },
         error: function (exception) {
             alert("Cannot Create Order" + exception);
@@ -206,35 +241,52 @@ var primary=1
 
         }
     });
+}
 
+function cancel(id,time)
+{
+   var json ="{ \"status\": \"CLOSED\""+"}"
 
-    function populate_order(data)
+    var d = new Date();
+    var n = d.getHours();
+    var current_time = d.getHours();
+    if((time[0]-current_time)<1)
     {
+        $.ajax({
+        url: "http://localhost:10000/api/foodmania/customer/updateOrder/"+id,
+        type: "POST",
+        contentType: "application/json",
+        data: json,
+        success: function (data) {
 
-        $.each(data, function (i, item) {
-          if(CustomerPage.order_count<50) {
+            console.log("current time "+current_time);
+            time1=time.split(":");
 
-              console.log()
-              CustomerPage.placed_orders[CustomerPage.order_count].orderid = item.orderid;
-              CustomerPage.placed_orders[CustomerPage.order_count].time = item.time;
-              CustomerPage.placed_orders[CustomerPage.order_count].item_name = item.itemNameList;
-              CustomerPage.placed_orders[CustomerPage.order_count].status="OPEN"
-              CustomerPage.order_count++
-          }
-            else
-          {
-              CustomerPage.order_count=0;
-          }
+                var json ="{ \"status\": \"CUSTOMER_UNRESPONSIVE\""+"}"
+                $.ajax({
+                    url: "http://localhost:10000/api/foodmania/customer/updateOrder/"+id,
+                    type: "POST",
+                    contentType: "application/json",
+                    data: json,
+                    success: function (data) {},
+                    error: function (exception) {
+                        alert("Cannot Update Order" + exception);
+                    },
+                    complete: function () {
+                    }
+                });
 
-          })
-    }
 
-    function show_orders()
-    {
-        $.each(CustomerPage.placed_orders, function (i, item) {
-            addItemRow(item.order,item.item_merchant_name,item.item_name, item.item_price * item.item_count, item.item_count,item.merchant_id);
-        })
-    }
+            }
+       alert("Succesfully Closed Order");
+        },
+        error: function (exception) {
+            alert("Cannot Update Order" + exception);
+        },
+        complete: function () {
+
+        }
+    });
 }
 function signOut()
 {
