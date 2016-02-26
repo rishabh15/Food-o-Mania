@@ -28,6 +28,7 @@ public class LoginController {
     {
         this.loginService = loginService;
     }
+
     @POST
     @Path("/addUser")
     @Timed
@@ -38,5 +39,17 @@ public class LoginController {
     {
         return loginService.addUserLogin(login);
     }
+
+    @GET
+    @Path("/getType/{userName}/{password}")
+    @Timed
+    @UnitOfWork(value = "master")
+    @Produces(MediaType.APPLICATION_JSON)
+
+    public String getType(@PathParam("userName") String userName,@PathParam("password") String password)
+    {
+        return loginService.getType(userName,password);
+    }
+
 
 }
