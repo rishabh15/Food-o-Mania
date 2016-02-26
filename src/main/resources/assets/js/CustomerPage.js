@@ -1,9 +1,15 @@
 /**
  * Created by nitish.ojha on 25/02/16.
  */
-
-
 var CustomerPage = {
+  order_count:0,
+   placed_orders:[{
+       orderid:"",
+       item_name:"",
+       status:"OPEN",
+       time:""
+   }],
+
     menu: {},
     count: 0,
     order: [{
@@ -31,6 +37,7 @@ var CustomerPage = {
 
 $( document ).ready(function() {
 
+
     console.log("called document ready");
     $.ajax({
         url: "http://localhost:10000/api/foodmania/merchant/getMenu",
@@ -43,6 +50,7 @@ $( document ).ready(function() {
                 var container = $('#customer_pages');
                 console.log(item);
               //  console.log(item.merchantInfoEntity.merchantid);
+
                 CustomerPage.merchant[item.merchantInfoEntity.merchantid] =new Object();
                 merchantname=item.merchantInfoEntity.name;
                 merchantid=item.merchantInfoEntity.merchantid
@@ -64,6 +72,7 @@ $( document ).ready(function() {
             })
         }
     });
+
 })
 
 function add(item,merchantname,merchantid)
@@ -98,11 +107,12 @@ function addItemRow(item_id,merchantName,itemdesc, price, count,time,merchant_id
         '<input type="number" id=item_count' + item_id + ' min="0" max="5" value=' + count + '>' + '</label>' +
         '</div> </td> <td <div class=\"col-sm-1\">' +
         '<button type="button" class="button-xs" onclick="save(' + item_id + ')">save</button>' +
-        '</div> </td><td <div class=\"col-sm-1\">' +
+        '</div> </td><td <div class=\"col-sm-1\ id="timepicker3">' +
         '<input type="time" id=time'+item_id+'>' + '</label>' +
         '</div> </td><td <div class=\"col-sm-1\">' +
         '<button type="button" class="button-xs" onclick="remove_row(' + $(this).closest('tr').attr('id') + ',' + item_id + ')"><span class="glyphicon glyphicon-remove"></span></button>' +
         '</div> </td></tr>');
+
 
 }
 
@@ -187,8 +197,7 @@ var primary=1
         data: final_order,
         crossDomain: true,
         success: function (data) {
-           alert("successfully ordered");
-        $('#cart').empty();
+            populate_order(data)
         },
         error: function (exception) {
             alert("Cannot Create Order" + exception);
@@ -199,4 +208,35 @@ var primary=1
     });
 
 
+    function populate_order(data)
+    {
+
+        $.each(data, function (i, item) {
+          if(CustomerPage.order_count<50) {
+
+              console.log()
+              CustomerPage.placed_orders[CustomerPage.order_count].orderid = item.orderid;
+              CustomerPage.placed_orders[CustomerPage.order_count].time = item.time;
+              CustomerPage.placed_orders[CustomerPage.order_count].item_name = item.itemNameList;
+              CustomerPage.placed_orders[CustomerPage.order_count].status="OPEN"
+              CustomerPage.order_count++
+          }
+            else
+          {
+              CustomerPage.order_count=0;
+          }
+
+          })
+    }
+
+    function show_orders()
+    {
+        $.each(CustomerPage.placed_orders, function (i, item) {
+            addItemRow(item.order,item.item_merchant_name,item.item_name, item.item_price * item.item_count, item.item_count,item.merchant_id);
+        })
+    }
+}
+function signOut()
+{
+    window.location = "/login.html";
 }
