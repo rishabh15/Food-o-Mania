@@ -12,6 +12,62 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div class="modal fade" id="signUpModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="orderId">Create Account</h4>
+            </div>
+            <div class="modal-body">
+                <form name="login">
+                    <ul>
+                        <li>
+                            <label for="usermail">Username</label>
+                            <input type="text" id="usermail" placeholder="Enter Username" required>
+                        </li>
+                        <li>
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Enter Password" required></li>
+                        <li>
+                            <label for="repeatpassword">Repeat Password</label>
+                            <input type="password" id="repeatpassword" placeholder="Enter Password" required></li>
+                        <li>
+                        <li>
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Enter Name" required></li>
+                        <li>
+                        <li>
+                            <label for="phone">Phone</label>
+                            <input type="text" id="phone" placeholder="Enter Phone" required></li>
+                        <li>
+                        <li>
+                            <label for="email">Email</label>
+                            <input type="text" id="email" placeholder="Enter email" required></li>
+                        <li>
+                        <li>
+                            <label for="password">Email</label>
+                            <input type="text" name="password" placeholder="Enter Password" required></li>
+                        <li>
+                        <li>
+                        <select style="position:absolute;top:0px;left:0px;width:200px; height:25px;line-height:20px;margin:0;padding:0;" onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
+                            <option></option>
+                            <option value="Customer">Customer</option>
+                            <option value="Merchant">Merchant</option>
+                        </select>
+                        </li>
+                        <li>
+                            <input type="submit" value="Submit" onclick="enterinfo()">
+                            <input type="submit" value="Clear" onclick="clear()">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <section class="loginform cf" style="background:#efefe9;">
     <form name="login">
         <ul>
