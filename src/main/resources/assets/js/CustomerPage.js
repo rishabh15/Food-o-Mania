@@ -177,7 +177,7 @@ var primary=1
             primary++
         })
     orders = orders.slice(0, -1);
-var final_order="["+orders+"]"
+    var final_order="["+orders+"]"
 
     console.log("final_order"+final_order)
     $.ajax({
@@ -188,11 +188,13 @@ var final_order="["+orders+"]"
         crossDomain: true,
         success: function (data) {
            alert("successfully ordered");
+        $('#cart').empty();
         },
         error: function (exception) {
-            alert("Cannot Create User!!,Please check backend Server" + exception);
+            alert("Cannot Create Order" + exception);
         },
         complete: function () {
+
         }
     });
 
