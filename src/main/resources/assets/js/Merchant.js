@@ -1,7 +1,6 @@
 /**
  * Created by rishabh.sood on 25/02/16.
  */
-
 $(document).ready(function() {
     $.ajax({
         url: "api/foodmania/merchant/getOrders/MER001",
@@ -102,7 +101,7 @@ $(document).on('click', '#statuslistdropdown li a', function() {
 });
 
 function updateOrderStatus() {
-    var orderId = $("#orderId").html();//document.getElementById("orderId").textContent
+    var orderId = $("#orderId").html();
     var status = document.getElementById("statuslist").firstChild.data.trim();
     var json = "{\"status\":\""+status+"\"}"
     $.ajax({
@@ -122,38 +121,66 @@ function updateOrderStatus() {
 })
 }
 
-function addMenu() {
+function generateMenu() {
     $('#menuModal').modal();
 }
 
+function addMenu() {
+    var itemdata="";
+    var table = document.getElementById('menuItemlist');
+    for (var r = 1, n = table.rows.length; r < n; r++) {
+        /*for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
+            alert(table.rows[r].cells[c].innerHTML);
+        }*/
+        itemdata = itemdata + "{\n"+
+        "\"@id\": 3,\n"+
+        "\"itemid\": null,\n"+
+        "\"itemdesc\": \""+table.rows[r].cells[0].innerHTML+"\",\n"+
+        "\"available\": \""+table.rows[r].cells[1].innerHTML+"\",\n"+
+        "\"price\": "+table.rows[r].cells[2].innerHTML+",\n"+
+        "\"menuEntity\": 1\n"+
+        "}";
+        if(r!=table.rows.length-1) {
+            itemdata = itemdata + ",";
+        }
+    }
+    console.log("Item:"+itemdata);
+    alert(typeof itemdata);
+
+    var json = "{\n"+
+        "\"@id\": 1,\n"+
+        "\"menuid\": null,\n"+
+        "\"active\": \"TRUE\",\n"+
+        "\"merchantInfoEntity\": {\n"+
+            "\"@id\": 2,\n"+
+            "\"merchantid\": \"MER001\",\n"+
+            "\"name\": null,\n"+
+            "\"email\": null,\n"+
+            "\"phone\": null,\n"+
+            "\"menuEntities\": null,\n"+
+            "\"customerOrderEntities\": null\n"+
+        "},\n"+
+        "\"itemEntities\":["+itemdata+"]\n"+
+    "}";
+
+    console.log("Json"+json);
+    /*$.ajax({
+        url: "/api/foodmania/merchant/createMenu/MER001",
+        type: "POST",
+        contentType: "application/json",
+        data: json,
+        success: function (data) {
+            alert("Menu Added Successfully");
+        },
+        error: function () {
+            alert("Error in adding Menu!!");
+        },
+        complete: function () {
+        }
+    })*/
+}
+
 function csvFile() {
-    /*var x = document.getElementById("myFile");
-    var txt = "";
-    if ('files' in x) {
-        if (x.files.length == 0) {
-            txt = "Select one or more files.";
-        } else {
-            for (var i = 0; i < x.files.length; i++) {
-                txt += "<br><strong>" + (i+1) + ". file</strong><br>";
-                var file = x.files[i];
-                if ('name' in file) {
-                    txt += "name: " + file.name + "<br>";
-                }
-                if ('size' in file) {
-                    txt += "size: " + file.size + " bytes <br>";
-                }
-            }
-        }
-    }
-    else {
-        if (x.value == "") {
-            txt += "Select one or more files.";
-        } else {
-            txt += "The files property is not supported by your browser!";
-            txt  += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead.
-        }
-    }
-    document.getElementById("demo").innerHTML = txt;*/
     var itemTable = $('#menuItemlist');
     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
     if (regex.test($("#myFile").val().toLowerCase())) {
@@ -174,8 +201,6 @@ function csvFile() {
                     table.append(row);
                     itemTable.append(row);
                 }
-                //$("#dvCSV").html('');
-                //$("#dvCSV").append(table);
             }
             reader.readAsText($("#myFile")[0].files[0]);
         } else {
