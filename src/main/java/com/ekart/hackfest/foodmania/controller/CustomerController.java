@@ -53,11 +53,9 @@ public class CustomerController {
     @UnitOfWork(value = "master")
     @Produces(MediaType.APPLICATION_JSON)
 
-    public List<CustomerFinalOrder> createOrder(List<CustomerOrderEntity> customerOrderEntityList)
+    public List<CustomerOrderEntity> createOrder(List<CustomerOrderEntity> customerOrderEntityList)
     {
-        List<CustomerOrderEntity> customerOrderEntityList1 = customerService.createOrder(customerOrderEntityList);
-
-        return customerService.createFinalOrder(customerOrderEntityList1);
+        return customerService.createOrder(customerOrderEntityList);
 
     }
 
@@ -81,6 +79,17 @@ public class CustomerController {
         customerOrderEntity1.setItemForOrderEntities(itemForOrderEntityList1);
         return customerOrderEntity1;*/
     }
+
+    @GET
+    @Path("/getOrderSummary/{customerId}")
+    @Timed
+    @UnitOfWork(value = "master")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CustomerFinalOrder> getOrderSummary(@PathParam("customerId") String customerId)
+    {
+        return customerService.getOrderSummary(customerId);
+    }
+
 
 
 

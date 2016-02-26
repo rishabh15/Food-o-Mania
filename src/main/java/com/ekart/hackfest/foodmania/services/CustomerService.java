@@ -21,30 +21,32 @@ public class CustomerService {
     private MenuDao menuDao;
     private ItemForOrderDao itemForOrderDao;
 
-    public CustomerService(CustomerOrderDao customerOrderDao,ReferenceCountDao referenceCountDao)
-    {
+
+    public CustomerService(CustomerOrderDao customerOrderDao, ReferenceCountDao referenceCountDao) {
         this.customerOrderDao = customerOrderDao;
         this.referenceCountDao = referenceCountDao;
+
     }
 
 
-    public CustomerOrderEntity updateOrder(String orderId,Status status)
-    {
-        return customerOrderDao.updateOrder(orderId,status);
+    public CustomerOrderEntity updateOrder(String orderId, Status status) {
+        return customerOrderDao.updateOrder(orderId, status);
+    }
+
+    public List<CustomerFinalOrder> getOrderSummary(String customerId) {
+        List<CustomerOrderEntity> customerOrderEntities = customerOrderDao.getOrderSummary(customerId);
+        return createFinalOrder(customerOrderEntities, customerId);
+
     }
 
 
-    public List<CustomerOrderEntity> getOrder()
-    {
-        List<CustomerOrderEntity> customerOrderEntities=customerOrderDao.getOrder();
-        for(CustomerOrderEntity customerOrderEntity:customerOrderEntities)
-        {
-           // customerOrderEntity.setCustomerEntity(null);
+    public List<CustomerOrderEntity> getOrder() {
+        List<CustomerOrderEntity> customerOrderEntities = customerOrderDao.getOrder();
+        for (CustomerOrderEntity customerOrderEntity : customerOrderEntities) {
+            // customerOrderEntity.setCustomerEntity(null);
         }
         return customerOrderEntities;
     }
-
-
 
 
     public CustomerOrderEntity getItemList(String orderId) {
@@ -53,7 +55,7 @@ public class CustomerService {
 
     public List<CustomerOrderEntity> createOrder(List<CustomerOrderEntity> customerOrderEntityList) {
 
-        for(CustomerOrderEntity customerOrderEntity:customerOrderEntityList) {
+        for (CustomerOrderEntity customerOrderEntity : customerOrderEntityList) {
             ReferenceCountEntity referenceCount = referenceCountDao.getReferenceCount();
             long count = referenceCount.getCount();
             String orderId = "ORD" + count;
@@ -65,24 +67,28 @@ public class CustomerService {
         return customerOrderDao.createOrder(customerOrderEntityList);
     }
 
-    public List<CustomerFinalOrder> createFinalOrder(List<CustomerOrderEntity> customerOrderEntityList1)
-    {
+    public List<CustomerFinalOrder> createFinalOrder(List<CustomerOrderEntity> customerOrderEntityList1, String customerId) {
         List<CustomerFinalOrder> customerFinalOrderList = new ArrayList<CustomerFinalOrder>();
-        for (CustomerOrderEntity customerOrderEntity : customerOrderEntityList1) {
-            CustomerFinalOrder customerFinalOrder = new CustomerFinalOrder();
-            customerFinalOrder.setOrderId(customerOrderEntity.getOrderid());
-            customerFinalOrder.setTime(customerOrderEntity.getTime());
 
-            List<String> itemNameList = new ArrayList<String>();
-            for (ItemForOrderEntity itemForOrderEntity : customerOrderEntity.getItemForOrderEntities()) {
-                String itemName = itemForOrderEntity.getItemdesc();
-                itemNameList.add(itemName);
+        for (CustomerOrderEntity customerOrderEntity : customerOrderEntityList1) {
+
+            if (customerOrderEntity.getCustomerEntity().getCustomerid().equals(customerId)) {
+                CustomerFinalOrder customerFinalOrder = new CustomerFinalOrder();
+                customerFinalOrder.setOrderId(customerOrderEntity.getOrderid());
+                customerFinalOrder.setTime(customerOrderEntity.getTime());
+
+                List<String> itemNameList = new ArrayList<String>();
+                for (ItemForOrderEntity itemForOrderEntity : customerOrderEntity.getItemForOrderEntities()) {
+                    String itemName = itemForOrderEntity.getItemdesc();
+                    itemNameList.add(itemName);
+                }
+                customerFinalOrder.setItemNameList(itemNameList);
+                customerFinalOrderList.add(customerFinalOrder);
+
+
             }
-            customerFinalOrder.setItemNameList(itemNameList);
-            customerFinalOrderList.add(customerFinalOrder);
 
         }
         return customerFinalOrderList;
     }
-
 }
