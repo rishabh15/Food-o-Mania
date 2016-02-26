@@ -135,8 +135,8 @@ function addMenu() {
         "\"@id\": "+i+",\n"+
         "\"itemid\": null,\n"+
         "\"itemdesc\": \""+table.rows[r].cells[0].innerHTML+"\",\n"+
-        "\"available\": "+table.rows[r].cells[1].innerHTML+" ,\n"+
-        "\"price\": "+table.rows[r].cells[2].innerHTML+",\n"+
+        "\"available\":1,\n"+
+        "\"price\": 50,\n"+
         "\"menuEntity\": 1\n"+
         "}";
         if(r!=table.rows.length-1) {

@@ -1,6 +1,7 @@
 /**
  * Created by nitish.ojha on 25/02/16.
  */
+    var customerId= sessionStorage.getItem('username');
 var CustomerPage = {
   order_id:"test",
     userid: "",
@@ -29,7 +30,7 @@ var CustomerPage = {
         merchant_name: "",
         merchant_id: "",
         customer_name: "Nitish",
-        customer_id: "Cust001",
+        customer_id: customerId,
         customer_number: 9620307284,
         time: ""
     }],
@@ -81,7 +82,7 @@ function addItemRowOrder(order_id,item_name,time, status) {
 
 $( document ).ready(function() {
 
-CustomerPage.userid="CUST001";
+CustomerPage.userid=customerId;
     console.log("called document ready");
     $.ajax({
         url: "http://localhost:10000/api/foodmania/merchant/getMenu",
@@ -220,7 +221,7 @@ function place_order() {
                 "\"time\":\"" + item.item_time + "\",\n" +
                 "\"comments\":" + "\"hot and spicy\"" + ",\n" +
                 "\"status\":" + "\"OPEN\"" + ",\n" +
-                "\"customerEntity\":" + "{\"customerid\":" + "\"CUST001\"" + "\n" +
+                "\"customerEntity\":" + "{\"customerid\":" + "\""+customerId+"\"" + "\n" +
                 "},\n" +
                 "\"merchantInfoEntity\":" + "{\"merchantid\":" + "\"" + CustomerPage.order[item.item_id].item_merchant_id + "\"" + "\},\n" +
                 "\"itemForOrderEntities\":" + "[{\"itemid\":" + "\"" + item.item_id + "\"" + ",\n" +
