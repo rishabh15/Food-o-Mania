@@ -8,7 +8,7 @@ $(document).ready(function() {
         contentType: "application/json",
         async: false,
         success: function (data) {
-            var order = data;//data.customerOrderEntities;
+            var order = data;
             console.log(data);
             for (var i = 0; i < order.length; i++) {
                 addRow(order[i].orderId, order[i].status, order[i].time, order[i].price, order[i].name, order[i].phone) ;
@@ -129,14 +129,12 @@ function addMenu() {
     var itemdata="";
     var table = document.getElementById('menuItemlist');
     for (var r = 1, n = table.rows.length; r < n; r++) {
-        /*for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
-            alert(table.rows[r].cells[c].innerHTML);
-        }*/
+        var i=r+2;
         itemdata = itemdata + "{\n"+
-        "\"@id\": 3,\n"+
+        "\"@id\": "+i+",\n"+
         "\"itemid\": null,\n"+
         "\"itemdesc\": \""+table.rows[r].cells[0].innerHTML+"\",\n"+
-        "\"available\": \""+table.rows[r].cells[1].innerHTML+"\",\n"+
+        "\"available\": "+table.rows[r].cells[1].innerHTML+" ,\n"+
         "\"price\": "+table.rows[r].cells[2].innerHTML+",\n"+
         "\"menuEntity\": 1\n"+
         "}";
@@ -153,7 +151,7 @@ function addMenu() {
         "\"active\": \"TRUE\",\n"+
         "\"merchantInfoEntity\": {\n"+
             "\"@id\": 2,\n"+
-            "\"merchantid\": \"MER001\",\n"+
+            "\"merchantid\": \"MER002\",\n"+
             "\"name\": null,\n"+
             "\"email\": null,\n"+
             "\"phone\": null,\n"+
@@ -164,8 +162,8 @@ function addMenu() {
     "}";
 
     console.log("Json"+json);
-    /*$.ajax({
-        url: "/api/foodmania/merchant/createMenu/MER001",
+    $.ajax({
+        url: "/api/foodmania/merchant/createMenu/MER002",
         type: "POST",
         contentType: "application/json",
         data: json,
@@ -177,7 +175,7 @@ function addMenu() {
         },
         complete: function () {
         }
-    })*/
+    })
 }
 
 function csvFile() {
