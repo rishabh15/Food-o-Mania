@@ -51,7 +51,7 @@ function enter() {
             var json = JSON.parse(data);
             var status = json.type;
             if(status == "Customer") {
-                window
+                sessionStorage.setItem('username',username);
             } else {
 
             }
