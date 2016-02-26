@@ -58,4 +58,17 @@ public class LoginService {
         return login;
 
     }
+
+    public String getType(String userName,String password)
+    {
+        LoginEntity loginEntity = loginDao.getType(userName, password);
+        if(loginEntity!=null)
+        {
+            return ("{\"type\":\""+loginEntity.getType())+"\",\"username\":\""+loginEntity.getUsername()+"\"}";
+        }
+        else
+        {
+            return ("{\"type\":null,\"username\":null}");
+        }
+    }
 }
