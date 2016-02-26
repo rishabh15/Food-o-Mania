@@ -33,7 +33,7 @@ public class LoginService {
 
         loginDao.addUserLogin(loginEntity);
 
-        if(login.getType()=="CUSTOMER")
+        if(login.getType().toLowerCase().equals("customer"))
         {
             CustomerEntity customerEntity = new CustomerEntity();
             customerEntity.setCustomerid(login.getUsername());

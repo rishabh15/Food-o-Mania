@@ -8,7 +8,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
     <title>Login Screen</title>
-    <link rel="stylesheet" href="css/normalize.css">
+    <!--<link rel="stylesheet" href="css/normalize.css">-->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -23,8 +23,8 @@
                 <form name="login" class="form-horizontal">
                     <ul>
                         <li>
-                            <label for="usermail">Username</label>
-                            <input type="text" id="usermail" placeholder="Enter Username" required>
+                            <label for="username">Username</label>
+                            <input type="text" id="username" placeholder="Enter Username" required>
                         </li>
                         <li>
                             <label for="password">Password</label>
@@ -47,7 +47,7 @@
                         <li>
                         <li>
                         <label for="dropbox">Select Type</label>
-                        <select id="dropbox" onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
+                        <select id="dropbox">
                             <option></option>
                             <option value="Customer">Customer</option>
                             <option value="Merchant">Merchant</option>
