@@ -44,18 +44,22 @@ function enter() {
     var password = document.getElementById("user-password").value.trim();
     $.ajax({
         url: "/api/foodmania/login/getType/"+username+"/"+password,
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         async: false,
         success: function (data) {
-            var json = JSON.parse(data);
+            event.preventDefault();
+            var json = data;
             var status = json.type;
             var username = json.username;
+            console.log(status+":"+username);
             sessionStorage.setItem('username',username);
             if(status == "Customer") {
-                window.location = "\Customer.html";
+                console.log("Inside customer");
+                window.location = "/CustomerPage.html";
             } else {
-                window.location = "\Merchant.html";
+                console.log("Inside Merchant");
+                window.location = "/Merchant.html";
             }
         },
         error: function () {

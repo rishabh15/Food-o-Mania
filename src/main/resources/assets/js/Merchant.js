@@ -1,9 +1,10 @@
 /**
  * Created by rishabh.sood on 25/02/16.
  */
+var merchant = sessionStorage.getItem('username');
 $(document).ready(function() {
     $.ajax({
-        url: "api/foodmania/merchant/getOrders/MER001",
+        url: "api/foodmania/merchant/getOrders/"+merchant,
         type: "GET",
         contentType: "application/json",
         async: false,
@@ -151,7 +152,7 @@ function addMenu() {
         "\"active\": \"TRUE\",\n"+
         "\"merchantInfoEntity\": {\n"+
             "\"@id\": 2,\n"+
-            "\"merchantid\": \"MER002\",\n"+
+            "\"merchantid\": \""+merchant+"\",\n"+
             "\"name\": null,\n"+
             "\"email\": null,\n"+
             "\"phone\": null,\n"+
@@ -163,7 +164,7 @@ function addMenu() {
 
     console.log("Json"+json);
     $.ajax({
-        url: "/api/foodmania/merchant/createMenu/MER002",
+        url: "/api/foodmania/merchant/createMenu/"+merchant,
         type: "POST",
         contentType: "application/json",
         data: json,

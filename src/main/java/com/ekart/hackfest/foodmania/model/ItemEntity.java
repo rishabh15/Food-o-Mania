@@ -31,10 +31,6 @@ public class ItemEntity {
     @Column(name = "PRICE")
     private int price;
 
-    @Basic
-    @Column(name = "PRODUCT_IMAGE")
-    private byte[] productImage;
-
     @ManyToOne
     @JoinColumn(name = "MENUID", referencedColumnName = "MENUID")
     private MenuEntity menuEntity;
