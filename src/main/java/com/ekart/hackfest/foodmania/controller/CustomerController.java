@@ -57,35 +57,8 @@ public class CustomerController {
     {
         List<CustomerOrderEntity> customerOrderEntityList1 = customerService.createOrder(customerOrderEntityList);
 
-        List<CustomerFinalOrder> customerFinalOrderList= new ArrayList<CustomerFinalOrder>();
-        for(CustomerOrderEntity customerOrderEntity:customerOrderEntityList1)
-        {
-            CustomerFinalOrder customerFinalOrder = new CustomerFinalOrder();
-            customerFinalOrder.setOrderId(customerOrderEntity.getOrderid());
-            customerFinalOrder.setTime(customerOrderEntity.getTime());
-
-            for(ItemForOrderEntity itemForOrderEntity :customerOrderEntity.getItemForOrderEntities())
-            {
-                String itemName = itemForOrderEntity.getItemdesc();
-                customerFinalOrder.getItemNameList().add(itemName);
-            }
-
-            customerFinalOrderList.add(customerFinalOrder);
-
-        }
-        return customerFinalOrderList;
-
-        /*CustomerOrderEntity customerOrderEntity1 = new CustomerOrderEntity();
-        CustomerEntity customerEntity1 = new CustomerEntity();
-        MerchantInfoEntity merchantInfoEntity1 = new MerchantInfoEntity();
-        List<ItemForOrderEntity> itemForOrderEntityList1 = new ArrayList<ItemForOrderEntity>();
-        ItemForOrderEntity itemForOrderEntity1 = new ItemForOrderEntity();
-        itemForOrderEntityList1.add(itemForOrderEntity1);
-
-        customerOrderEntity1.setCustomerEntity(customerEntity1);
-        customerOrderEntity1.setMerchantInfoEntity(merchantInfoEntity1);
-        customerOrderEntity1.setItemForOrderEntities(itemForOrderEntityList1);
-        return customerOrderEntity1;*/
+        return customerService.createFinalOrder(customerOrderEntityList1);
+        
     }
 
     @GET
