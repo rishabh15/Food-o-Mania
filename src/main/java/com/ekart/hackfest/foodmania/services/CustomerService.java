@@ -76,6 +76,7 @@ public class CustomerService {
                 CustomerFinalOrder customerFinalOrder = new CustomerFinalOrder();
                 customerFinalOrder.setOrderId(customerOrderEntity.getOrderid());
                 customerFinalOrder.setTime(customerOrderEntity.getTime());
+                customerFinalOrder.setStatus(customerOrderEntity.getStatus());
 
                 List<String> itemNameList = new ArrayList<String>();
                 for (ItemForOrderEntity itemForOrderEntity : customerOrderEntity.getItemForOrderEntities()) {
