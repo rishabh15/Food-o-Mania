@@ -13,4 +13,9 @@ public class CustomerDao extends AbstractDAO<CustomerEntity> {
 
         super(sessionFactory);
     }
+
+    public void addCustomer(CustomerEntity customerEntity)
+    {
+        persist(customerEntity);
+    }
 }

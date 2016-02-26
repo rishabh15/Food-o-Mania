@@ -3,6 +3,7 @@
 
     <persistence-unit name="persistenceUnit">
         <class>com.ekart.hackfest.foodmania.model.ReferenceCountEntity</class>
+        <class>com.ekart.hackfest.foodmania.model.LoginEntity</class>
         <properties>
             <property name="eclipselink.jdbc.url"
                       value="jdbc:mysql://ekl-lm-perf-platform-xlarge-004.stage.nm.flipkart.com:3306/foodmania"/>

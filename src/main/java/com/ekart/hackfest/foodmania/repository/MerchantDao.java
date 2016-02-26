@@ -51,4 +51,7 @@ public class MerchantDao extends AbstractDAO<MerchantInfoEntity> {
 
         return persist(merchantInfoEntity);
     }
+
+
+
 }

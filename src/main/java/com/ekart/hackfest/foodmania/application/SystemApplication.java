@@ -2,13 +2,12 @@ package com.ekart.hackfest.foodmania.application;
 
 import com.ekart.hackfest.foodmania.controller.CustomerController;
 import com.ekart.hackfest.foodmania.controller.DummyController;
+import com.ekart.hackfest.foodmania.controller.LoginController;
 import com.ekart.hackfest.foodmania.controller.MerchantController;
 import com.ekart.hackfest.foodmania.model.*;
-import com.ekart.hackfest.foodmania.repository.CustomerOrderDao;
-import com.ekart.hackfest.foodmania.repository.MenuDao;
-import com.ekart.hackfest.foodmania.repository.MerchantDao;
-import com.ekart.hackfest.foodmania.repository.ReferenceCountDao;
+import com.ekart.hackfest.foodmania.repository.*;
 import com.ekart.hackfest.foodmania.services.CustomerService;
+import com.ekart.hackfest.foodmania.services.LoginService;
 import com.ekart.hackfest.foodmania.services.MerchantService;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
@@ -21,7 +20,7 @@ import io.dropwizard.setup.Environment;
  * Created by rishabh.sood on 23/02/16.
  */
 public class SystemApplication extends Application<SystemConfiguration>{
-    public static final HibernateBundle<SystemConfiguration> bundle = new HibernateBundle<SystemConfiguration>(CustomerEntity.class, CustomerOrderEntity.class, MerchantInfoEntity.class, MenuEntity.class, ItemEntity.class, ItemForOrderEntity.class,ReferenceCountEntity.class) {
+    public static final HibernateBundle<SystemConfiguration> bundle = new HibernateBundle<SystemConfiguration>(CustomerEntity.class, CustomerOrderEntity.class, MerchantInfoEntity.class, MenuEntity.class, ItemEntity.class, ItemForOrderEntity.class,ReferenceCountEntity.class,LoginEntity.class) {
         @Override
         protected String name() {
             return "master";
@@ -50,6 +49,7 @@ public class SystemApplication extends Application<SystemConfiguration>{
         environment.jersey().register(controller1);
         environment.jersey().register(new CustomerController(new CustomerService(new CustomerOrderDao(bundle.getSessionFactory()),new ReferenceCountDao(bundle.getSessionFactory()  ))));
         environment.jersey().register(new MerchantController(new MerchantService(new MerchantDao(bundle.getSessionFactory()),new MenuDao(bundle.getSessionFactory()),new ReferenceCountDao(bundle.getSessionFactory()))));
+        environment.jersey().register(new LoginController(new LoginService(new MerchantDao(bundle.getSessionFactory()),new CustomerDao(bundle.getSessionFactory()),new LoginDao(bundle.getSessionFactory()))));
 
     }
     
