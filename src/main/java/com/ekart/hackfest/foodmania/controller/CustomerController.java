@@ -53,20 +53,12 @@ public class CustomerController {
     @UnitOfWork(value = "master")
     @Produces(MediaType.APPLICATION_JSON)
 
-    public List<CustomerOrderEntity> createOrder(List<CustomerOrderEntity> customerOrderEntityList)
+    public List<CustomerFinalOrder> createOrder(List<CustomerOrderEntity> customerOrderEntityList)
     {
-         return customerService.createOrder(customerOrderEntityList);
-        /*CustomerOrderEntity customerOrderEntity1 = new CustomerOrderEntity();
-        CustomerEntity customerEntity1 = new CustomerEntity();
-        MerchantInfoEntity merchantInfoEntity1 = new MerchantInfoEntity();
-        List<ItemForOrderEntity> itemForOrderEntityList1 = new ArrayList<ItemForOrderEntity>();
-        ItemForOrderEntity itemForOrderEntity1 = new ItemForOrderEntity();
-        itemForOrderEntityList1.add(itemForOrderEntity1);
+        List<CustomerOrderEntity> customerOrderEntityList1 = customerService.createOrder(customerOrderEntityList);
 
-        customerOrderEntity1.setCustomerEntity(customerEntity1);
-        customerOrderEntity1.setMerchantInfoEntity(merchantInfoEntity1);
-        customerOrderEntity1.setItemForOrderEntities(itemForOrderEntityList1);
-        return customerOrderEntity1;*/
+        return customerService.createFinalOrder(customerOrderEntityList1);
+
     }
 
     @GET

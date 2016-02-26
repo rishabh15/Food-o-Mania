@@ -1,9 +1,6 @@
 package com.ekart.hackfest.foodmania.services;
 
-import com.ekart.hackfest.foodmania.model.CustomerOrderEntity;
-import com.ekart.hackfest.foodmania.model.ItemForOrderEntity;
-import com.ekart.hackfest.foodmania.model.ReferenceCountEntity;
-import com.ekart.hackfest.foodmania.model.Status;
+import com.ekart.hackfest.foodmania.model.*;
 import com.ekart.hackfest.foodmania.repository.*;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
@@ -68,5 +65,24 @@ public class CustomerService {
         return customerOrderDao.createOrder(customerOrderEntityList);
     }
 
+    public List<CustomerFinalOrder> createFinalOrder(List<CustomerOrderEntity> customerOrderEntityList1)
+    {
+        List<CustomerFinalOrder> customerFinalOrderList = new ArrayList<CustomerFinalOrder>();
+        for (CustomerOrderEntity customerOrderEntity : customerOrderEntityList1) {
+            CustomerFinalOrder customerFinalOrder = new CustomerFinalOrder();
+            customerFinalOrder.setOrderId(customerOrderEntity.getOrderid());
+            customerFinalOrder.setTime(customerOrderEntity.getTime());
+
+            List<String> itemNameList = new ArrayList<String>();
+            for (ItemForOrderEntity itemForOrderEntity : customerOrderEntity.getItemForOrderEntities()) {
+                String itemName = itemForOrderEntity.getItemdesc();
+                itemNameList.add(itemName);
+            }
+            customerFinalOrder.setItemNameList(itemNameList);
+            customerFinalOrderList.add(customerFinalOrder);
+
+        }
+        return customerFinalOrderList;
+    }
 
 }
