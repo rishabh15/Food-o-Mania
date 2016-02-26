@@ -50,10 +50,12 @@ function enter() {
         success: function (data) {
             var json = JSON.parse(data);
             var status = json.type;
+            var username = json.username;
+            sessionStorage.setItem('username',username);
             if(status == "Customer") {
-                sessionStorage.setItem('username',username);
+                window.location = "\Customer.html";
             } else {
-
+                window.location = "\Merchant.html";
             }
         },
         error: function () {
