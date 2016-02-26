@@ -54,17 +54,18 @@ public class CustomerService {
         return customerOrderDao.getItemList(orderId);
     }
 
-    public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity) {
+    public List<CustomerOrderEntity> createOrder(List<CustomerOrderEntity> customerOrderEntityList) {
 
-
-        ReferenceCountEntity referenceCount = referenceCountDao.getReferenceCount();
-        long count = referenceCount.getCount();
-        String orderId = "ORD" + count;
-        count++;
-        referenceCount.setCount(count);
-        referenceCountDao.addReferenceCount(referenceCount);
-        customerOrderEntity.setOrderid(orderId);
-        return customerOrderDao.createOrder(customerOrderEntity);
+        for(CustomerOrderEntity customerOrderEntity:customerOrderEntityList) {
+            ReferenceCountEntity referenceCount = referenceCountDao.getReferenceCount();
+            long count = referenceCount.getCount();
+            String orderId = "ORD" + count;
+            count++;
+            referenceCount.setCount(count);
+            referenceCountDao.addReferenceCount(referenceCount);
+            customerOrderEntity.setOrderid(orderId);
+        }
+        return customerOrderDao.createOrder(customerOrderEntityList);
     }
 
 

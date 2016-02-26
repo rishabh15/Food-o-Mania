@@ -53,9 +53,9 @@ public class CustomerController {
     @UnitOfWork(value = "master")
     @Produces(MediaType.APPLICATION_JSON)
 
-    public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity)
+    public List<CustomerOrderEntity> createOrder(List<CustomerOrderEntity> customerOrderEntityList)
     {
-         return customerService.createOrder(customerOrderEntity);
+         return customerService.createOrder(customerOrderEntityList);
         /*CustomerOrderEntity customerOrderEntity1 = new CustomerOrderEntity();
         CustomerEntity customerEntity1 = new CustomerEntity();
         MerchantInfoEntity merchantInfoEntity1 = new MerchantInfoEntity();

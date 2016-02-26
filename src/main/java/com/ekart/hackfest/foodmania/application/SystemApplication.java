@@ -49,7 +49,7 @@ public class SystemApplication extends Application<SystemConfiguration>{
         final DummyController controller1 = new DummyController();
         environment.jersey().register(controller1);
         environment.jersey().register(new CustomerController(new CustomerService(new CustomerOrderDao(bundle.getSessionFactory()),new ReferenceCountDao(bundle.getSessionFactory()  ))));
-        environment.jersey().register(new MerchantController(new MerchantService(new MerchantDao(bundle.getSessionFactory()),new MenuDao(bundle.getSessionFactory()))));
+        environment.jersey().register(new MerchantController(new MerchantService(new MerchantDao(bundle.getSessionFactory()),new MenuDao(bundle.getSessionFactory()),new ReferenceCountDao(bundle.getSessionFactory()))));
 
     }
     
