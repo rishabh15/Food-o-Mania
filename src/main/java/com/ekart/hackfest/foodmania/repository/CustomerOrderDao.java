@@ -41,9 +41,12 @@ public class CustomerOrderDao extends AbstractDAO<CustomerOrderEntity> {
         return output;
     }
 
-    public CustomerOrderEntity createOrder(CustomerOrderEntity customerOrderEntity) {
+    public List<CustomerOrderEntity> createOrder(List<CustomerOrderEntity> customerOrderEntityList) {
 
-        return persist(customerOrderEntity);
+        for(CustomerOrderEntity customerOrderEntity:customerOrderEntityList) {
+             persist(customerOrderEntity);
+        }
+        return customerOrderEntityList;
     }
 
     public List<CustomerOrderEntity> getOrder() {
