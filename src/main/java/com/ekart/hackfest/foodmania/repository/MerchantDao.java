@@ -31,7 +31,7 @@ public class MerchantDao extends AbstractDAO<MerchantInfoEntity> {
         c.add(Restrictions.eq("merchantid", merchantId));
         MerchantInfoEntity output =(MerchantInfoEntity) c.uniqueResult();
         return output;*/
-        Query sqlQuery = this.currentSession().createSQLQuery("Select O.ORDERID as orderId, O.STATUS as status,O.TIME as time, O.PRICE as price, C.NAME as name, C.PHONE as phone \n" +
+        Query sqlQuery = this.currentSession().createSQLQuery("Select O.ORDERID as orderId, O.STATUS as status, O.TIME as time, O.PRICE as price, C.NAME as name, C.PHONE as phone \n" +
                 "FROM CustomerOrder O INNER JOIN Customer C \n" +
                 "WHERE C.CUSTOMERID = O.CUSTOMERID AND O.MERCHANTID=\""+merchantId+"\"").setResultTransformer(Transformers.aliasToBean(MerchantRefresh.class));
         List<MerchantRefresh> list = sqlQuery.list();
@@ -51,4 +51,7 @@ public class MerchantDao extends AbstractDAO<MerchantInfoEntity> {
 
         return persist(merchantInfoEntity);
     }
+
+
+
 }
